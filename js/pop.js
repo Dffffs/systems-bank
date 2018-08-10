@@ -34,7 +34,7 @@ function openit(table){
             success:function(res){
                 var html = '<option value=""></option>';
                 for (var i=0;i<res.data.length;i++){
-                    html += '<option option="'+res.data[i].typeNo+'">'+res.data[i].typeName+'</option>'
+                    html += '<option value="'+res.data[i].typeNo+'">'+res.data[i].typeName+'</option>'
                 }
                 $('#basic4 select').html(html);
             }
@@ -45,7 +45,7 @@ function openit(table){
             success:function(res){
                 var html = '<option value=""></option>';
                 for (var i=0;i<res.data.length;i++){
-                    html += '<option option="'+res.data[i].unitNo+'">'+res.data[i].unitName+'</option>'
+                    html += '<option value="'+res.data[i].unitNo+'">'+res.data[i].unitName+'</option>'
                 }
                 $('#basic5 select').html(html);
             }
@@ -56,12 +56,22 @@ function openit(table){
             success:function (res) {
                 var html = '<option value=""></option>';
                 for (var i=0;i<res.data.length;i++){
-                    html += '<option option="'+res.data[i].supplierNo+'">'+res.data[i].supplierName+'</option>'
+                    html += '<option value="'+res.data[i].supplierNo+'">'+res.data[i].supplierName+'</option>'
                 }
                 $('#more4 select').html(html);
             }
         });
-
+        $.ajax({
+            url:apiUrl + 'article_brand/query_article_brand',
+            type:'GET',
+            success:function (res) {
+                var html = '<option value=""></option>';
+                for (var i=0;i<res.data.length;i++){
+                    html += '<option value="'+res.data[i].brandNo+'">'+res.data[i].brandName+'</option>'
+                }
+                $('#more8 select').html(html);
+            }
+        })
     }else{
         content = '编码: <input class="new-code"/> <br /> 单位:<input class="unit">'
     };
@@ -100,7 +110,7 @@ function openit(table){
                     articleName:$('#basic1').val(),
                     specification:$('#more4 select').val(),
                     shortenedForm:$('#more1').val(),
-                    purchasingPrice:$('#basic3').val(),
+                    purchasingPrice:$('#basic3').val()*100,//进价
                     articleTypeNo:$('#basic4 select').val(),
                     articleBrandNo:$('#more2').val(),
                     articleUnitNo:$('#basic5 select').val(),
