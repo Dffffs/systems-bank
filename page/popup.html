@@ -42,7 +42,7 @@
 					<div class="inpt-inline">
 						<label>*类别:</label>
 						<div class="layui-input-block">
-					        <select name="city" lay-verify="required">
+					        <select name=" " lay-verify="required">
 						        <option value=""></option>
 						        <option value="0">类别1</option>
 						        <option value="1">类别2</option>
@@ -55,7 +55,7 @@
 					<div class="inpt-inline">
 						<label>单位:</label>
 						<div class="layui-input-block">
-					        <select name="city" lay-verify="required">
+					        <select name=" " lay-verify="required">
 						        <option value=""></option>
 						        <option value="0">单位1</option>
 						        <option value="1">单位2</option>
@@ -83,7 +83,7 @@
 					<div class="inpt-inline">
 						<label>供应商:</label>
 						<div class="layui-input-block">
-					        <select name="city" lay-verify="required">
+					        <select name=" " lay-verify="required">
 						        <option value=""></option>
 						        <option value="0">类别1</option>
 						        <option value="1">类别2</option>
@@ -100,7 +100,7 @@
 					<div class="inpt-inline">
 						<label>商品状态:</label>
 						<div class="layui-input-block">
-					        <select name="city" lay-verify="required">
+					        <select name=" " lay-verify="required">
 						        <option value=""></option>
 						        <option value="0">状态1</option>
 						        <option value="1">状态2</option>
@@ -153,7 +153,7 @@
 					<div class="inpt-inline">
 						<label>*类别:</label>
 						<div class="layui-input-block">
-					        <select name="city" lay-verify="required">
+					        <select name=" " lay-verify="required">
 						        <option value=""></option>
 						        <option value="0">类别1</option>
 						        <option value="1">类别2</option>
@@ -166,7 +166,7 @@
 					<div class="inpt-inline">
 						<label>单位:</label>
 						<div class="layui-input-block">
-					        <select name="city" lay-verify="required">
+					        <select name=" " lay-verify="required">
 						        <option value=""></option>
 						        <option value="0">单位1</option>
 						        <option value="1">单位2</option>
@@ -194,7 +194,7 @@
 					<div class="inpt-inline">
 						<label>供应商:</label>
 						<div class="layui-input-block">
-					        <select name="city" lay-verify="required">
+					        <select name=" " lay-verify="required">
 						        <option value=""></option>
 						        <option value="0">类别1</option>
 						        <option value="1">类别2</option>
@@ -211,7 +211,7 @@
 					<div class="inpt-inline">
 						<label>商品状态:</label>
 						<div class="layui-input-block">
-					        <select name="city" lay-verify="required">
+					        <select name=" " lay-verify="required">
 						        <option value=""></option>
 						        <option value="0">状态1</option>
 						        <option value="1">状态2</option>
@@ -244,15 +244,15 @@
 	<div id="gy-pop" class="gy-pop">
 		<form class="layui-form" action="">
 			<div class="blockbox">
-				<label><span>*</span>编码:</label><input type="" name="" id="" value=""/>
+				<label><span>*</span>编码:</label><input type="" name="supplierNo" id="" value=""/>
 			</div>
 			<div class="blockbox">
-				<label><span>*</span>名称:</label><input type="" name="" id="" value=""/>
+				<label><span>*</span>名称:</label><input type="" name="supplierName" id="" value=""/>
 			</div>
 			<div class="blockbox">
 				<label><span>*</span>状态:</label>
 				<div class="layui-input-block">
-			        <select name="city" lay-verify="required">
+			        <select name="status" lay-verify="required">
 				        <option value=""></option>
 				        <option value="0">状态1</option>
 				        <option value="1">状态2</option>
@@ -274,14 +274,14 @@
 			<div class="blockbox">
 				<label>说明:</label><textarea></textarea>
 			</div>
-			<div class="gybnt">
+			<!--<div class="gybnt">
 				<a class="save" href="javascript:;">保存并新增</a>
 				<a class="cancel" href="javascript:;">取消</a>
-			</div>
+			</div>-->
 		</form>
 	</div>
 	<!--商品类别-删除-->
-	<div id="del-pop" class="del-pop" >
+	<div id="del-pop" class="del-pop">
 		<p class="tips">您确定删除记录吗?</p>
 		<div class="del-bnt">
 			<a href="javascript:;">确定</a>
@@ -299,7 +299,7 @@
 				<div class="inpt-inline">
 					<label>供货商:</label>
 					<div class="layui-input-block">
-				        <select name="city" lay-verify="required">
+				        <select name=" " lay-verify="required">
 					        <option value=""></option>
 					        <option value="0">供货商1</option>
 					        <option value="1">供货商2</option>
@@ -309,10 +309,7 @@
 				        </select>
 				    </div>
 				</div>
-				<div class="inpt-inline">
-					<label>经手人:</label>
-					<input type="text" name="" id="" value="" />
-				</div>
+				
 				<div class="inpt-inline bz">
 					<label>备注:</label>
 					<input type="text" name="" id="" value="" />
@@ -515,22 +512,117 @@
     <div id="user-xz" class="user-xz">
     	<form class="layui-form" action="">
 	    	<div class="blockbox2">
-	    		<div class="ipt-inline">
-	    			<label>*用户名:</label>
-	    			<input type="" name="" disabled="true"  value="002" />
+	    		<div class="fl">
+	    			<div class="ipt-inline">
+		    			<label>*用户名:</label>
+		    			<input type="" name="" disabled="true"  value="002" />
+		    		</div>
+		    		<div class="ipt-inline">
+		    			<label>姓名:</label>
+		    			<input type="" name=""  value="002" />
+		    		</div>
+		    		<div class="ipt-inline">
+		    			<label>是否收银员:</label>
+		    			<div class="layui-input-block">
+					        <select name=" " lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">是</option>
+						        <option value="1">否</option>
+						    </select>
+					    </div>
+		    		</div>
 	    		</div>
-	    		<div class="ipt-inline">
-	    			<label>密码:</label>
-	    			<input type="password" name="" />
+		    	<div class="fr">
+		    		<div class="ipt-inline">
+		    			<label>密码:</label>
+		    			<input type="password" name="" />
+		    		</div>
+			    		
+		    		<div class="ipt-inline">
+		    			<label>状态:</label>
+		    			<div class="layui-input-block">
+					        <select name=" " lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">状态1</option>
+						        <option value="1">状态2</option>
+						        <option value="2">状态3</option>
+						        <option value="3">状态4</option>
+						        <option value="4">状态5</option>
+					        </select>
+					    </div>
+		    		</div>
+			    		
+		    		<div class="ipt-inline">
+		    			<label>用户角色:</label>
+		    			<div class="layui-input-block">
+					        <select name=" " lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">管理员1</option>
+						        <option value="1">管理员2</option>
+						    </select>
+					    </div>
+		    		</div>
+		    	</div>	
+		    		
+	    	</div>
+    	</form>
+    </div>
+    <!--用户管理-编辑-->
+    <div id="user-bj" class="user-bj">
+    	<form class="layui-form" action="">
+	    	<div class="blockbox2">
+	    		<div class="fl">
+	    			<div class="ipt-inline">
+		    			<label>*用户名:</label>
+		    			<input type="" name="" disabled="true"  value="002" />
+		    		</div>
+		    		<div class="ipt-inline">
+		    			<label>姓名:</label>
+		    			<input type="" name=""  value="002" />
+		    		</div>
+		    		<div class="ipt-inline">
+		    			<label>是否收银员:</label>
+		    			<div class="layui-input-block">
+					        <select name=" " lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">是</option>
+						        <option value="1">否</option>
+						    </select>
+					    </div>
+		    		</div>
 	    		</div>
-	    		<div class="ipt-inline">
-	    			<label>姓名:</label>
-	    			<input type="" name=""  value="002" />
-	    		</div>
-	    		<div class="ipt-inline">
-	    			<label>姓名:</label>
-	    			<input type="" name=""  value="002" />
-	    		</div>
+		    	<div class="fr">
+		    		<div class="ipt-inline">
+		    			<label>密码:</label>
+		    			<input type="password" name="" />
+		    		</div>
+			    		
+		    		<div class="ipt-inline">
+		    			<label>状态:</label>
+		    			<div class="layui-input-block">
+					        <select name=" " lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">状态1</option>
+						        <option value="1">状态2</option>
+						        <option value="2">状态3</option>
+						        <option value="3">状态4</option>
+						        <option value="4">状态5</option>
+					        </select>
+					    </div>
+		    		</div>
+			    		
+		    		<div class="ipt-inline">
+		    			<label>用户角色:</label>
+		    			<div class="layui-input-block">
+					        <select name=" " lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">管理员1</option>
+						        <option value="1">管理员2</option>
+						    </select>
+					    </div>
+		    		</div>
+		    	</div>	
+		    		
 	    	</div>
     	</form>
     </div>

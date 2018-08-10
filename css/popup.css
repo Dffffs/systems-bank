@@ -88,7 +88,7 @@ a.sm-bnt{
 	width: 10.4rem;
 	height: 2.5rem;
 	line-height: 2.5rem;
-	background-color: #808dff;
+	background-color: #3e4052;
 	border-radius: 0.6rem;
 	color: #fff;
 	font-size: 1.1rem;
@@ -128,8 +128,33 @@ tbody input[type=number]{width: 5rem;text-align: center;color: #808dff;}
 .Non-editable{text-align: center;display: none;}
 .Non-editable p{font-size: 1.2rem;color: #333;padding: 4rem 0;}
 .Non-editable a.qd-bnt{color: #fff;background-color: #808dff;border-radius:6px ;width: 8rem;margin-bottom: 2rem; display:inline-block;text-align: center;line-height: 2.4rem;}
-.user-xz{width: 58.4rem;padding: 2.4rem 3.6rem;}
-.blockbox2{margin: 0 4rem;}
-.blockbox2 .ipt-inline{width: 50%;float: left;}
-.blockbox2 .ipt-inline label{width: 6rem;text-align: right;line-height: 2.6rem;}
-.blockbox2 .ipt-inline input{background-color: #f5f4f7;border: 0;height: 2.6rem;width: calc(100% - 7rem);margin-left: 1rem;box-sizing: ;}
+.user-xz{padding: 2.4rem 4rem;display: none;}
+.blockbox2{zoom:1;}
+.blockbox2 .fl{float: left;width: 50%;}
+.blockbox2 .fr{float: right;width: 50%;}
+.blockbox2 .ipt-inline{width: 100%;line-height: 2.6rem;margin-bottom: 1.1rem;zoom: 1;}
+.blockbox2 .ipt-inline label{width: 6rem;text-align: right;line-height: 2.6rem;display:block;float: left;margin-right: 1rem;}
+.blockbox2 .ipt-inline input{background-color: #f5f4f7;border: 0;height: 2.6rem;padding-left: 20px; width: calc(100% - 9rem);margin-right: 2rem;box-sizing: border-box; }
+.blockbox2 .ipt-inline .layui-input-block{width: calc(100% - 9rem);height: 2.6rem;float: left;margin-right: 2rem;box-sizing: border-box;}
+.blockbox2 .layui-input-block .layui-form-select dl{width: 100%;max-height: 150px;}
+.blockbox2:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+.blockbox2 .ipt-inline:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+.user-bj{padding: 2.4rem 4rem;display: none;}
+/*入库新增按钮*/
+.layui-layer-btn{text-align: center!important;padding-top: 0!important;}
+.layui-layer-btn a{
+	width: 6rem!important;
+	height: 2.6rem!important;
+	line-height: 2.6rem!important;
+	background-color: #808dff!important;
+	border-radius: 0.6rem!important;
+	border: 0!important;
+	text-align: center;
+	color: #fff;
+	display: inline-block;
+	margin-right: 2rem;
+}
+a.layui-layer-btn1{
+	background-color: #fff!important;
+	border: 1px solid #333;
+}
