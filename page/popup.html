@@ -299,7 +299,7 @@
 				<div class="inpt-inline">
 					<label>供货商:</label>
 					<div class="layui-input-block">
-				        <select name=" " lay-verify="required">
+				        <select  name=" " lay-verify="required">
 					        <option value=""></option>
 					        <option value="0">供货商1</option>
 					        <option value="1">供货商2</option>
@@ -318,7 +318,8 @@
 					<a class="sm-bnt" href="javascript:;">扫码入库</a>
 				</div>
 			</div>
-			<div class="tab-box">
+		</form>	
+			<div id="tab-box" class="tab-box">
 				<table class="layui-table">
 				    <colgroup>
 				      <col>
@@ -342,13 +343,13 @@
 				      </tr> 
 				         
 				    </thead>
-				    <tbody>
+				    <tbody class="tab-body">
 				        <tr>
 					        <td>1</td>
 					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
 					        <td>
-					        	<select name="">
-					        		<option value=""></option>
+					        	<select class="sele" name="">
+					        		<option value="">请选择</option>
 					        		<option value="">001</option>
 					        		<option value="">002</option>
 					        		<option value="">003</option>
@@ -368,8 +369,8 @@
 					        <td>1</td>
 					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
 					        <td>
-					        	<select name="">
-					        		<option value=""></option>
+					        	<select class="sele" name="">
+					        		<option value="">请选择</option>
 					        		<option value="">001</option>
 					        		<option value="">002</option>
 					        		<option value="">003</option>
@@ -389,7 +390,7 @@
 				</table>
 			</div>
 			<a class="bnt-bc" href="javascript:;">保存</a>
-		</form>
+		
 	</div>
 	<!--库存管理-新增-->
 	<div id="stock-pop" class="stock-pop" >

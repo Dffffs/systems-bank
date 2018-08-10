@@ -2,7 +2,7 @@ layui.use(['layer', 'form'], function(){
 	var layer = layui.layer;
 	var form = layui.form;
 	var table = layui.table;
-	
+	form.render('select');
 });
 
 function closeThisPop(index){
@@ -280,7 +280,7 @@ function opendel(table,row){
 		}
     });
 }
-//入库新增
+/*入库新增*/
 function openrk(){
 	layer.open({
         type: 1,
@@ -288,13 +288,58 @@ function openrk(){
         title: ['入库-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '89.4rem', 
         content: $('#storage-pop'),
+        /*入库新增增加删除*/
+       	success: function(layero, index){
+       		var tbody = $('#tab-box').find('.tab-body')
+		    $('#tab-box').on('click','button.jia',function () {
+		        tbody.append(
+		        	'<tr>'+
+				        '<td>1</td>'+
+				        '<td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>'+
+				        '<td>'+
+				        	'<select class="sele" name="">'+
+				        		'<option value="">请选择</option>'+
+				        		'<option value="">001</option>'+
+				        		'<option value="">002</option>'+
+				        		'<option value="">003</option>'+
+				        		'<option value="">004</option>'+
+				        		'<option value="">005</option>'+
+				        	'</select>'+
+				        '</td>'+
+				        '<td></td>'+
+				        '<td></td>'+
+				        '<td></td>'+
+				        '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+				        '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+				        '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+				        '<td></td>'+
+			        '</tr>'
+		        )
+		      /*  layui.use(['layer', 'form'], function(){
+					var layer = layui.layer;
+					var form = layui.form;
+					var table = layui.table;
+					form.render('select');
+				});*/
+		    });
+		    $('#tab-box').on('click','button.jian',function () {
+
+		    	 var o=$(this).parent().parent()
+		    	 o.empty()
+		    });
+		},
+		/*function rkadd(){
+			$('#tab-box').on('click','button.jia',function () {
+		        console.log(111)
+		    });
+		}rkadd()*/
         cancel: function(index, layero){
-            closeThisPop(index);
+		  $('body',parent.document).find('.pop').hide();
 		}
     });
 	
 }
-//库存管理新增
+
 function openkc(){
 	layer.open({
         type: 1,
