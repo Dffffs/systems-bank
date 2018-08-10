@@ -69,20 +69,13 @@
             var text = $(this).find('span').text();
             $('body',parent.document).find('.pop').show();
             if (text == '新增'){
-                if (fakeData.topText=="用户管理"){
-                    
-                }else if (fakeData.topText=="修改密码"){
+                es.openuser();
 
-                } else if(fakeData.topText=="角色管理"){
-
-                }else{
-
-                }
-                es.openit();
             }else if(text == '编辑'){
-                es.openbj();
+                es.openuserbj();
             } else if(text == '删除'){
-                table.row('.choose').remove().draw( false );
+                //table.row('.choose').remove().draw( false );
+                es.opendel(table);
             }
         });
         $('.button .search input:button').click(function () {

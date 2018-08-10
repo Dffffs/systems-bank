@@ -242,8 +242,8 @@ function opengy(){
         title: ['供货商-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: ['42.4rem', '43.1rem'],
         content: $('#gy-pop'),
-        cancel: function(index, layero){ 
-		  $('body',parent.document).find('.pop').hide();
+        cancel: function(index, layero){
+            closeThisPop(index);
 		}
     });
 }
@@ -256,7 +256,7 @@ function opendel(table,row){
         title: ['商品类别-删除', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: ['62.3rem', '20rem'],
         content: $('#del-pop'),
-        yes:function(){
+        yes:function(index){
             var topText = sessionStorage.getItem('topText');
             var value = row.attr('value');
             if (topText=="商品类别"){
@@ -268,18 +268,19 @@ function opendel(table,row){
             }else{
 
             }
-            $('body',parent.document).find('.pop').hide();
+            closeThisPop(index);
             table.row('.choose').remove().draw( false );
         },
-        no:function(){
-            $('body',parent.document).find('.pop').hide();
+        no:function(index){
+            closeThisPop(index);
         },
-        cancel: function(index, layero){ 
-		  $('body',parent.document).find('.pop').hide();
+        cancel: function(index, layero){
+            closeThisPop(index);
 
 		}
     });
 }
+//入库新增
 function openrk(){
 	layer.open({
         type: 1,
@@ -287,12 +288,13 @@ function openrk(){
         title: ['入库-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '89.4rem', 
         content: $('#storage-pop'),
-        cancel: function(index, layero){ 
-		  $('body',parent.document).find('.pop').hide();
+        cancel: function(index, layero){
+            closeThisPop(index);
 		}
     });
 	
 }
+//库存管理新增
 function openkc(){
 	layer.open({
         type: 1,
@@ -300,8 +302,8 @@ function openkc(){
         title: ['库存管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '89.4rem', 
         content: $('#stock-pop'),
-        cancel: function(index, layero){ 
-		  $('body',parent.document).find('.pop').hide();
+        cancel: function(index, layero){
+            closeThisPop(index);
 		}
     });
 }   
@@ -311,23 +313,39 @@ function openTips(){
         type: 1,
         closeBtn: 1,
         title: ['提示', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
-        area: '45rem', 
+        area: '45rem',
         content: $('#Non-editable'),
-        cancel: function(index, layero){ 
-		  $('body',parent.document).find('.pop').hide();
+        cancel: function(index, layero){
+            closeThisPop(index);
 		}
     });
-} 
+}
 /*用户管理-新增*/
-function openTips(){
+function openuser(){
+    var juge = sessionStorage.getItem('topText');
 	layer.open({
         type: 1,
         closeBtn: 1,
         title: ['用户管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '58.4rem', 
-        content: $('#Non-editable'),
-        cancel: function(index, layero){ 
-		  $('body',parent.document).find('.pop').hide();
+        content: $('#user-xz'),
+        cancel: function(index, layero){
+            closeThisPop(index);
 		}
     });
-} 
+}
+
+/*用户管理 - 编辑*/
+function openuserbj(){
+    var juge = sessionStorage.getItem('topText');
+    layer.open({
+        type: 1,
+        closeBtn: 1,
+        title: ['用户管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        area: '58.4rem',
+        content: $('#user-bj'),
+        cancel: function(index, layero){
+            closeThisPop(index);
+        }
+    });
+}
