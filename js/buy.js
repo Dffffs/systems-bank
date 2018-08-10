@@ -107,7 +107,7 @@
                 }
 
             } else if(text == '删除'){
-                e.opendel(table);
+                e.opendel(table,$('#tables .choose'));
             }else{
 
             }

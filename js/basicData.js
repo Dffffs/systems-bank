@@ -111,12 +111,7 @@
 
             } else if(text == '删除'){
                 // table.row('.choose').remove().draw( false );
-
-                if ($('#tables .choose').length>1){
-                    alert('暂时不支持多行删除')
-                } else{
-                    es.opendel(table,$('#tables .choose'));
-                }
+                es.opendel(table,$('#tables .choose'));
             }else{
 
             }

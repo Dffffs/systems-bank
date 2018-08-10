@@ -23,45 +23,33 @@
 				<span>2.图片必须是PNG或者jpg格式</span>
 			</div>
 		</div>
-		<form class="layui-form" action="">
+		<form id="addPop" action="">
 			<div class="info-cont">
 				<p class="info-tit">基本资料</p>
 				<div class="flex-block">
 					<div class="inpt-inline">
 						<label>*商品名:</label>
-						<input type="text" name="" id="" value="" />
+						<input type="text" name="" id="basic1" value="" />
 					</div>
 					<div class="inpt-inline">
 						<label>规格:</label>
-						<input type="text" name="" id="" value="" />
+						<input type="text" name="" id="basic2" value="" />
 					</div>
 					<div class="inpt-inline">
 						<label>进货价:</label>
-						<input type="text" name="" id="" value="" />
+						<input type="text" name="" id="basic3" value="" />
 					</div>
 					<div class="inpt-inline">
 						<label>*类别:</label>
-						<div class="layui-input-block">
-					        <select name=" " lay-verify="required">
-						        <option value=""></option>
-						        <option value="0">类别1</option>
-						        <option value="1">类别2</option>
-						        <option value="2">类别3</option>
-						        <option value="3">类别4</option>
-						        <option value="4">类别5</option>
+						<div id="basic4">
+					        <select name=" ">
 					        </select>
 					    </div>
 					</div>
 					<div class="inpt-inline">
 						<label>单位:</label>
-						<div class="layui-input-block">
-					        <select name=" " lay-verify="required">
-						        <option value=""></option>
-						        <option value="0">单位1</option>
-						        <option value="1">单位2</option>
-						        <option value="2">单位3</option>
-						        <option value="3">单位4</option>
-						        <option value="4">单位5</option>
+						<div id="basic5">
+					        <select name=" ">
 					        </select>
 					    </div>
 					</div>
@@ -70,52 +58,42 @@
 				<div class="flex-block">
 					<div class="inpt-inline">
 						<label>简称:</label>
-						<input type="text" name="" id="" value="" />
+						<input type="text" name="" id="more1" value="" />
 					</div>
 					<div class="inpt-inline">
 						<label>品牌:</label>
-						<input type="text" name="" id="" value="" />
+						<input type="text" name="" id="more2" value="" />
 					</div>
 					<div class="inpt-inline">
 						<label>生产日期:</label>
-						<input type="text" name="" id="" value="" />
+						<input type="text" name="" id="more3" value="" />
 					</div>
 					<div class="inpt-inline">
 						<label>供应商:</label>
-						<div class="layui-input-block">
-					        <select name=" " lay-verify="required">
-						        <option value=""></option>
-						        <option value="0">类别1</option>
-						        <option value="1">类别2</option>
-						        <option value="2">类别3</option>
-						        <option value="3">类别4</option>
-						        <option value="4">类别5</option>
-					        </select>
+						<div id="more4">
+					        <select name=" "></select>
 					    </div>
 					</div>
 					<div class="inpt-inline">
 						<label>保质期(天):</label>
-						<input type="text" name="" id="" value="" />
+						<input type="text" name="" id="more5" value="" />
 					</div>
 					<div class="inpt-inline">
 						<label>商品状态:</label>
-						<div class="layui-input-block">
-					        <select name=" " lay-verify="required">
+						<div id="more6">
+					        <select name=" ">
 						        <option value=""></option>
-						        <option value="0">状态1</option>
-						        <option value="1">状态2</option>
-						        <option value="2">状态3</option>
-						        <option value="3">状态4</option>
-						        <option value="4">状态5</option>
+								<option value="01">正常</option>
+								<option value="02">停售</option>
 					        </select>
 					    </div>
 					</div>
 					<div class="inpt-inline sm">
 						<label>商品说明:</label>
-						<textarea name="" rows="" cols=""></textarea>
+						<textarea id="more7" name="" rows="" cols=""></textarea>
 					</div>
 				</div>
-				<a class="bnt-bc" href="javascript:;">保存并新增</a>
+				<!--<a class="bnt-bc" href="javascript:;">保存并新增</a>-->
 			</div>
 		</form>
 	</div>
@@ -283,10 +261,10 @@
 	<!--商品类别-删除-->
 	<div id="del-pop" class="del-pop">
 		<p class="tips">您确定删除记录吗?</p>
-		<div class="del-bnt">
-			<a href="javascript:;">确定</a>
-			<a href="javascript:;">取消</a>
-		</div>
+		<!--<div class="del-bnt">-->
+			<!--<a href="javascript:;">确定</a>-->
+			<!--<a href="javascript:;">取消</a>-->
+		<!--</div>-->
 	</div>
 	<!--入库-新增-->
 	<div id="storage-pop" class="storage-pop" >

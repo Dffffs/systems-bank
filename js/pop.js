@@ -2,7 +2,7 @@ layui.use(['layer', 'form'], function(){
 	var layer = layui.layer;
 	var form = layui.form;
 	var table = layui.table;
-	form.render('select');
+	
 });
 
 function closeThisPop(index){
@@ -28,6 +28,40 @@ function openit(table){
     }else if(juge == '商品信息'){
         content = $('#xz-box');
         area = ['89rem', '47rem'];
+        $.ajax({//商品类别
+            url:apiUrl + 'article_type/query_article_type',
+            type:'GET',
+            success:function(res){
+                var html = '<option value=""></option>';
+                for (var i=0;i<res.data.length;i++){
+                    html += '<option option="'+res.data[i].typeNo+'">'+res.data[i].typeName+'</option>'
+                }
+                $('#basic4 select').html(html);
+            }
+        });
+        $.ajax({//商品单位
+            url:apiUrl + 'article_unit/query_article_unit',
+            type:'GET',
+            success:function(res){
+                var html = '<option value=""></option>';
+                for (var i=0;i<res.data.length;i++){
+                    html += '<option option="'+res.data[i].unitNo+'">'+res.data[i].unitName+'</option>'
+                }
+                $('#basic5 select').html(html);
+            }
+        });
+        $.ajax({//供应商
+            url:apiUrl + 'supplier/query_supplier',
+            type:'GET',
+            success:function (res) {
+                var html = '<option value=""></option>';
+                for (var i=0;i<res.data.length;i++){
+                    html += '<option option="'+res.data[i].supplierNo+'">'+res.data[i].supplierName+'</option>'
+                }
+                $('#more4 select').html(html);
+            }
+        });
+
     }else{
         content = '编码: <input class="new-code"/> <br /> 单位:<input class="unit">'
     };
@@ -41,12 +75,12 @@ function openit(table){
         yes:function(index){
             var url = apiUrl;
             var data = {};
-            var row;
-            if (juge !='商品信息'){
-                row = ['<input type="checkbox">',$('.new-code').val(),$('.unit').val()];
-            }else{
-                row = '';
-            } //row为当前行数据 顺序为表头顺序
+            // var row;
+            // if (juge !='商品信息'){
+            //     row = ['<input type="checkbox">',$('.new-code').val(),$('.unit').val()];
+            // }else{
+            //     row = '';
+            // } //row为当前行数据 顺序为表头顺序
             if (juge == '商品类别'){
                 url += 'article_type/save_article_type';
                 data = {
@@ -62,7 +96,20 @@ function openit(table){
             }else if(juge == '商品信息'){
                 url += 'article/save_article';
                 content = $('#xz-box');
-
+                data = {
+                    articleName:$('#basic1').val(),
+                    specification:$('#more4 select').val(),
+                    shortenedForm:$('#more1').val(),
+                    purchasingPrice:$('#basic3').val(),
+                    articleTypeNo:$('#basic4 select').val(),
+                    articleBrandNo:$('#more2').val(),
+                    articleUnitNo:$('#basic5 select').val(),
+                    status:'01',//$('#more4 input').val(),
+                    shelfLifeDays:$('#more5').val(),
+                    imagesLink:$('#fileImage').val(),
+                    description:$('#more7').val(),
+                    dateInProduced:$('#more3').val()
+                };
             }else{
                 url += 'article_unit/save_article_unit';
                 data = {
@@ -78,7 +125,7 @@ function openit(table){
                 data:JSON.stringify(data),
                 success:function(res){
                     closeThisPop(index);
-                    table.row.add( row ).draw(); // 增加一行数据
+                    $('body',parent.document).find('.content iframe')[0].contentWindow.location.reload();
                 }
             });
         },
@@ -109,7 +156,9 @@ function getSome(code,content,area,choose){
             articleBarcode:code
         },
         success:function (res) {
-            console.log(res)
+            console.log(res);
+            var data = res.data;
+
             layer.open({
                 type: 1,
                 closeBtn: 1,
@@ -258,20 +307,45 @@ function opendel(table,row){
         content: $('#del-pop'),
         yes:function(index){
             var topText = sessionStorage.getItem('topText');
-            var value = row.attr('value');
+            var url = apiUrl;
+            var arr = [];
+            for (var i=0;i<row.length;i++){
+                arr.push(JSON.parse($(row[i]).attr('value'))[0]);
+            };
             if (topText=="商品类别"){
-
+               url += 'article_type/remove_article_type';//post data = 编号
             } else if (topText=="商品品牌"){
-
+                url += 'article_brand/remove_article_brand';//POST data = 编号
             }else if (topText=="商品信息"){
+                url += 'article/remove_article';
+            }else if (topText=="商品单位") {
+                url += 'article_unit/remove_article_unit';//post data = 编号
+            }else if (topText=="供货商") {
+                url += 'supplier/remove_supplier';//post 供应商编号
+            }else if (topText=="用户管理") {
 
-            }else{
+            }else if (topText=="角色管理") {
 
             }
-            closeThisPop(index);
-            table.row('.choose').remove().draw( false );
+
+            $.post({
+                url:url,
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data:JSON.stringify(arr),
+                success:function(res){
+                    for (var i=0;i<row.length;i++){
+                        table.row('.choose').remove()
+                    }
+                    table.draw( false );
+                    closeThisPop(index);
+                }
+            });
+
+
         },
-        no:function(index){
+        btn2:function(index){
             closeThisPop(index);
         },
         cancel: function(index, layero){
@@ -334,12 +408,12 @@ function openrk(){
 		    });
 		}rkadd()*/
         cancel: function(index, layero){
-		  $('body',parent.document).find('.pop').hide();
+            closeThisPop(index);
 		}
     });
 	
 }
-
+//库存管理新增
 function openkc(){
 	layer.open({
         type: 1,
