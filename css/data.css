@@ -1,0 +1,30 @@
+*{margin: 0;padding: 0;}
+.cont{background-color: #fff;}
+.edit{display: flex;height: 50px;line-height: 50px;padding: 15px 0;margin: 0 50px;}
+.flex{width: 100%;display: flex;}
+.edit-inline{margin-right: 80px;cursor: pointer;}
+.edit-inline img{float: left;margin-top: 10px;margin-right: 15px;}
+.edit-inline span{font-size:16px;color: #333;}
+.edit .int{ height: 40px;width: 380px; line-height: 40px;border-radius: 20px;overflow: hidden;flex-direction:row-reverse;}
+.edit .int input{outline:none;width:calc(100% - 90px);background-color: #f0f0f3;border: 0;float: left;height: 100%;box-sizing: border-box;padding:0 0 0 15px ;}
+.edit .int input::-webkit-input-placeholder { /* WebKit browsers */   
+color: #b7b7b7;   
+}   
+.edit .int input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */   
+color:#b7b7b7;   
+}   
+.edit .int input::-moz-placeholder { /* Mozilla Firefox 19+ */   
+color: #b7b7b7;   
+}   
+.edit .int input:-ms-input-placeholder { /* Internet Explorer 10+ */   
+color:#b7b7b7;   
+}   
+.edit .int label{width:90px;background-color: #808dff;color: #fff;display: inline-block;float: right;text-align: center;cursor: pointer;}
+.display{border: 1px solid #dcdcdc;border-radius: 10px;}
+.display thead tr{background-color: #f9f9fb;color: #000;font-size: 18px;height: 54px;}
+.box-cont{}
+.box-cont tr{height: 60px;text-align: center;}
+.box-cont tr:nth-child(2n){background-color: #f4f4f4;}
+.box-cont tr td{width: 15%;}
+.box-cont tr td:last-child{width: 55%;} 
+.dataTables_filter{display: none;} 

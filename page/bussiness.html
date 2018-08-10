@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/common/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/basicData.css">
+    <link rel="stylesheet" href="../css/bussiness.css">
+    <link rel="stylesheet" href="../css/common/common.css">
+</head>
+<body>
+<div id="contain">
+    <div class="title">
+        <p>列表</p>
+    </div>
+    <div class="content">
+        <div class="button">
+            <div class="highsearch">
+                <img src="../img/buy/advanced _query@2x.png" alt="">
+                <span>高级搜索</span>
+            </div>
+            <div class="search">
+                <div>
+                    <input type="text" placeholder="输入编码/名称进行查询">
+                    <input type="button" value="搜索">
+                </div>
+            </div>
+        </div>
+        <div class="cmsearch">
+            <div>
+                <ul>
+                    <li>日期: &nbsp;&nbsp;&nbsp;<input type="text" id="date"></li>
+                    <li>至 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="date1"></li>
+                    <li><label for="d1"><input id="d1" type="radio" name="date" value="1">今天</label></li>
+                    <li><label for="d2"><input id="d2" type="radio" name="date" value="2">昨天</label></li>
+                    <li><label for="d3"><input id="d3" type="radio" name="date" value="3">本周</label></li>
+                    <li><label for="d4"><input id="d4" type="radio" name="date" value="4">上周</label></li>
+                    <li><label for="d5"><input id="d5" type="radio" name="date" value="5">本月</label></li>
+                </ul>
+                <ul>
+                    <li>流水号:&nbsp;<input type="text" id="code"></li>
+                    <li>收银员: <input type="text" id="people"></li>
+                    <li>交易状态: <label for="s0"><input id="s0" type="radio" value="1" name="status">全部</label></li>
+                    <li><label for="s1"><input id="s1" type="radio" value="2" name="status">成功</label></li>
+                    <li><label for="s2"><input id="s2" type="radio" value="3" name="status">失败</label></li>
+                    <li><label for="s3"><input id="s3" type="radio" value="4" name="status">处理中</label></li>
+                </ul>
+            </div>
+            <div>
+                订单号:<input type="text" id="barcode">
+                <button class="confirm">确定</button>
+                <button class="cancle">取消</button>
+            </div>
+        </div>
+        <div class="tab">
+            <span class="active">交易流水</span><span>商品销售记录</span>
+        </div>
+        <div>
+            <table id="tables"></table>
+            <div id="move"></div>
+        </div>
+    </div>
+</div>
+<script src="../js/common/common.js"></script>
+<script src="../js/common/jquery-3.3.1.min.js"></script>
+<script src="../js/common/jquery.dataTables.min.js"></script>
+<script src="../js/layui/layui.js"></script>
+<script src="../js/bussiness.js"></script>
+</body>
+</html>

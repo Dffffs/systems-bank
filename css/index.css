@@ -1,0 +1,87 @@
+body{
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+    background: #ecf1f2;
+}
+#contain{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+#contain .left{
+    width: 14rem;
+    height: 100%;
+    padding:  2rem 0 ;
+    text-align: center;
+    float: left;
+    background-color: #3e4052;
+    color: #8393b8;
+    font-size: 1rem;
+}
+#contain .left .title{
+    margin-bottom: 4rem;
+}
+#contain .left .left-nav{
+    height: 4rem;
+    line-height: 4rem;
+    padding: 0 2rem 0 4rem;
+    text-align: left;
+}
+#contain .left .left-nav:hover{
+    cursor: pointer;
+}
+#contain .left .left-nav img{
+    margin-right: 1rem;
+}
+#contain .right{
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#contain .right .top{
+    background: white;
+    height: 5rem;
+}
+#contain .right .top>div:first-child{
+    display: inline-block;
+}
+.right .top>div{
+
+}
+.right .top>div:first-child ul{
+    margin: 0;
+}
+.right .top>div:first-child ul li{
+    line-height: 5rem;
+    float: left;
+    list-style: none;
+    margin-left: 3rem;
+}
+.right .top>div:first-child ul li:hover{
+    cursor: pointer;
+}
+.right .top>div:first-child ul li.active{
+    color: #808dff;
+    border-bottom: 2px solid #808dff;
+}
+#contain .right .top>div:last-child{
+    float: right;
+    display: inline-block;
+    height: 5rem;
+    line-height: 5rem;
+    margin-right: 5rem;
+}
+#contain .right .content{
+    flex: 1;
+    width: 100%;
+}
+.left-nav.active{
+    background:#131527
+}
+
+.left-nav{
+    background: #3e4052;
+}

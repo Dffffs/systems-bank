@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/common/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/basicData.css">
+    <link rel="stylesheet" href="../css/buy.css">
+    <link rel="stylesheet" href="../css/common/common.css">
+</head>
+<body>
+    <div id="contain">
+        <div class="title">
+            <p>列表</p>
+        </div>
+        <div class="content">
+            <div class="button">
+                <div class="add">
+                    <img src="../img/basicData/添加_Add@2x.png" alt="">
+                    <span>新增</span>
+                </div>
+                <div class="del">
+                    <img src="../img/basicData/删除@2x.png" alt="">
+                    <span>删除</span>
+                </div>
+                <div class="highsearch">
+                    <img src="../img/buy/advanced _query@2x.png" alt="">
+                    <span>高级搜索</span>
+                </div>
+                <div class="search">
+                    <div>
+                        <input type="text" placeholder="输入编码/名称进行查询">
+                        <input type="button" value="搜索">
+                    </div>
+                </div>
+            </div>
+            <div class="cmsearch">
+                <div>
+                    <ul>
+                        <li>日期: <input type="text" id="date"></li>
+                        <li>至 <input type="text" id="date1"></li>
+                        <li>单号: <input type="text" id="code"></li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="confirm">确定</button>
+                    <button class="cancle">取消</button>
+                </div>
+            </div>
+            <div>
+                <table id="tables"></table>
+                <div id="move"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/common/common.js"></script>
+    <script src="../js/common/jquery-3.3.1.min.js"></script>
+    <script src="../js/common/jquery.dataTables.min.js"></script>
+    <script src="../js/layui/layui.js"></script>
+    <script src="../js/buy.js"></script>
+</body>
+</html>

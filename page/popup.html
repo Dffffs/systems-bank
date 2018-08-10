@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/popup.css">
+    <link rel="stylesheet" href="../css/common/common.css">
+</head>
+<body>
+    
+    <!--商品信息-新增弹窗-->
+	<div id="xz-box" class="xz-box">
+		<div class="img-upload">
+			<div class="fl">
+				<img src="" alt="" />
+			</div>
+			<div class="img-text">
+				<p>商品图片</p>
+				<div class="inpt-bg">
+					<input id="fileImage" type="file" size="30" name="fileselect[]" multiple="">
+				</div>
+				<span>1.图片最大为200KB</span>
+				<span>2.图片必须是PNG或者jpg格式</span>
+			</div>
+		</div>
+		<form class="layui-form" action="">
+			<div class="info-cont">
+				<p class="info-tit">基本资料</p>
+				<div class="flex-block">
+					<div class="inpt-inline">
+						<label>*商品名:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>规格:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>进货价:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>*类别:</label>
+						<div class="layui-input-block">
+					        <select name="city" lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">类别1</option>
+						        <option value="1">类别2</option>
+						        <option value="2">类别3</option>
+						        <option value="3">类别4</option>
+						        <option value="4">类别5</option>
+					        </select>
+					    </div>
+					</div>
+					<div class="inpt-inline">
+						<label>单位:</label>
+						<div class="layui-input-block">
+					        <select name="city" lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">单位1</option>
+						        <option value="1">单位2</option>
+						        <option value="2">单位3</option>
+						        <option value="3">单位4</option>
+						        <option value="4">单位5</option>
+					        </select>
+					    </div>
+					</div>
+				</div>
+				<p class="info-tit">更多资料</p>
+				<div class="flex-block">
+					<div class="inpt-inline">
+						<label>简称:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>品牌:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>生产日期:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>供应商:</label>
+						<div class="layui-input-block">
+					        <select name="city" lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">类别1</option>
+						        <option value="1">类别2</option>
+						        <option value="2">类别3</option>
+						        <option value="3">类别4</option>
+						        <option value="4">类别5</option>
+					        </select>
+					    </div>
+					</div>
+					<div class="inpt-inline">
+						<label>保质期(天):</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>商品状态:</label>
+						<div class="layui-input-block">
+					        <select name="city" lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">状态1</option>
+						        <option value="1">状态2</option>
+						        <option value="2">状态3</option>
+						        <option value="3">状态4</option>
+						        <option value="4">状态5</option>
+					        </select>
+					    </div>
+					</div>
+					<div class="inpt-inline sm">
+						<label>商品说明:</label>
+						<textarea name="" rows="" cols=""></textarea>
+					</div>
+				</div>
+				<a class="bnt-bc" href="javascript:;">保存并新增</a>
+			</div>
+		</form>
+	</div>
+	<!--商品信息-修改-->
+	<div id="xg-box" class="xg-box">
+		<div class="img-upload">
+			<div class="fl">
+				<img src="" alt="" />
+			</div>
+			<div class="img-text">
+				<p>商品图片</p>
+				<div class="inpt-bg">
+					<input id="fileImage" type="file" size="30" name="fileselect[]" multiple="">
+				</div>
+				<span>1.图片最大为200KB</span>
+				<span>2.图片必须是PNG或者jpg格式</span>
+			</div>
+		</div>
+		<form class="layui-form" action="">
+			<div class="info-cont">
+				<p class="info-tit">基本资料</p>
+				<div class="flex-block">
+					<div class="inpt-inline">
+						<label>*商品名:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>规格:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>进货价:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>*类别:</label>
+						<div class="layui-input-block">
+					        <select name="city" lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">类别1</option>
+						        <option value="1">类别2</option>
+						        <option value="2">类别3</option>
+						        <option value="3">类别4</option>
+						        <option value="4">类别5</option>
+					        </select>
+					    </div>
+					</div>
+					<div class="inpt-inline">
+						<label>单位:</label>
+						<div class="layui-input-block">
+					        <select name="city" lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">单位1</option>
+						        <option value="1">单位2</option>
+						        <option value="2">单位3</option>
+						        <option value="3">单位4</option>
+						        <option value="4">单位5</option>
+					        </select>
+					    </div>
+					</div>
+				</div>
+				<p class="info-tit">更多资料</p>
+				<div class="flex-block">
+					<div class="inpt-inline">
+						<label>简称:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>品牌:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>生产日期:</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>供应商:</label>
+						<div class="layui-input-block">
+					        <select name="city" lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">类别1</option>
+						        <option value="1">类别2</option>
+						        <option value="2">类别3</option>
+						        <option value="3">类别4</option>
+						        <option value="4">类别5</option>
+					        </select>
+					    </div>
+					</div>
+					<div class="inpt-inline">
+						<label>保质期(天):</label>
+						<input type="text" name="" id="" value="" />
+					</div>
+					<div class="inpt-inline">
+						<label>商品状态:</label>
+						<div class="layui-input-block">
+					        <select name="city" lay-verify="required">
+						        <option value=""></option>
+						        <option value="0">状态1</option>
+						        <option value="1">状态2</option>
+						        <option value="2">状态3</option>
+						        <option value="3">状态4</option>
+						        <option value="4">状态5</option>
+					        </select>
+					    </div>
+					</div>
+					<div class="inpt-inline sm">
+						<label>商品说明:</label>
+						<textarea name="" rows="" cols=""></textarea>
+					</div>
+				</div>
+				<a class="bnt-bc" href="javascript:;">保存并修改</a>
+			</div>
+		</form>
+	</div>
+    <!--编辑弹窗-->
+	<div id="bj-box" class="bj-box">
+		<div class="blockbox">
+			<label><span>*</span>编码:</label><input type="" name="" id="" value="021" readonly="readonly"/>
+		</div>
+		<div class="blockbox bj">
+			<label><span>*</span>名称:</label><input type="text" name="" id="" value="零食" />
+		</div>
+		<a class="bnt-bc" href="javascript:;">保存并修改</a>
+	</div>
+	<!--供货商-新增弹窗-->
+	<div id="gy-pop" class="gy-pop">
+		<form class="layui-form" action="">
+			<div class="blockbox">
+				<label><span>*</span>编码:</label><input type="" name="" id="" value=""/>
+			</div>
+			<div class="blockbox">
+				<label><span>*</span>名称:</label><input type="" name="" id="" value=""/>
+			</div>
+			<div class="blockbox">
+				<label><span>*</span>状态:</label>
+				<div class="layui-input-block">
+			        <select name="city" lay-verify="required">
+				        <option value=""></option>
+				        <option value="0">状态1</option>
+				        <option value="1">状态2</option>
+				        <option value="2">状态3</option>
+				        <option value="3">状态4</option>
+				        <option value="4">状态5</option>
+			        </select>
+			    </div>
+			</div>
+			<div class="blockbox">
+				<label>联系人:</label><input type="" name="" id="" value=""/>
+			</div>
+			<div class="blockbox">
+				<label>联系电话:</label><input type="" name="" id="" value=""/>
+			</div>
+			<div class="blockbox">
+				<label>联系地址:</label><textarea></textarea>
+			</div>
+			<div class="blockbox">
+				<label>说明:</label><textarea></textarea>
+			</div>
+			<div class="gybnt">
+				<a class="save" href="javascript:;">保存并新增</a>
+				<a class="cancel" href="javascript:;">取消</a>
+			</div>
+		</form>
+	</div>
+	<!--商品类别-删除-->
+	<div id="del-pop" class="del-pop" >
+		<p class="tips">您确定删除记录吗?</p>
+		<div class="del-bnt">
+			<a href="javascript:;">确定</a>
+			<a href="javascript:;">取消</a>
+		</div>
+	</div>
+	<!--入库-新增-->
+	<div id="storage-pop" class="storage-pop" >
+		<form class="layui-form" action="">
+			<div class="flex-block">
+				<div class="inpt-inline">
+					<label>*门店:</label>
+					<input type="text" name="" id="" value="" />
+				</div>
+				<div class="inpt-inline">
+					<label>供货商:</label>
+					<div class="layui-input-block">
+				        <select name="city" lay-verify="required">
+					        <option value=""></option>
+					        <option value="0">供货商1</option>
+					        <option value="1">供货商2</option>
+					        <option value="2">供货商3</option>
+					        <option value="3">供货商4</option>
+					        <option value="4">供货商5</option>
+				        </select>
+				    </div>
+				</div>
+				<div class="inpt-inline">
+					<label>经手人:</label>
+					<input type="text" name="" id="" value="" />
+				</div>
+				<div class="inpt-inline bz">
+					<label>备注:</label>
+					<input type="text" name="" id="" value="" />
+				</div>
+				<div class="inpt-inline">
+					<a class="sm-bnt" href="javascript:;">扫码入库</a>
+				</div>
+			</div>
+			<div class="tab-box">
+				<table class="layui-table">
+				    <colgroup>
+				      <col>
+				      <col>
+				      <col width="150">
+				      <col>
+				    </colgroup>
+				    <thead>
+				      <tr>
+				      	<tr>
+				        <th>序号</th>
+				        <th>操作</th>
+				        <th>货号</th>
+				        <th>品名</th>
+				        <th>规格</th>
+				        <th>单位</th>
+				        <th>数量</th>
+				        <th>进价</th>
+				        <th>销售价</th>
+				        <th>进价总额</th>
+				      </tr> 
+				         
+				    </thead>
+				    <tbody>
+				        <tr>
+					        <td>1</td>
+					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
+					        <td>
+					        	<select name="">
+					        		<option value=""></option>
+					        		<option value="">001</option>
+					        		<option value="">002</option>
+					        		<option value="">003</option>
+					        		<option value="">004</option>
+					        		<option value="">005</option>
+					        	</select>
+					        </td>
+					        <td>前进牌特大号杯子</td>
+					        <td>1.5L</td>
+					        <td>个</td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0"/></td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0.00"/></td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0.00"/></td>
+					        <td>1000.00</td>
+				        </tr>
+				        <tr>
+					        <td>1</td>
+					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
+					        <td>
+					        	<select name="">
+					        		<option value=""></option>
+					        		<option value="">001</option>
+					        		<option value="">002</option>
+					        		<option value="">003</option>
+					        		<option value="">004</option>
+					        		<option value="">005</option>
+					        	</select>
+					        </td>
+					        <td>前进牌特大号杯子</td>
+					        <td>1.5L</td>
+					        <td>个</td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0"/></td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0.00"/></td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0.00"/></td>
+					        <td>1000.00</td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
+			<a class="bnt-bc" href="javascript:;">保存</a>
+		</form>
+	</div>
+	<!--库存管理-新增-->
+	<div id="stock-pop" class="stock-pop" >
+		<form class="layui-form" action="">
+			<div class="flex-block">
+				<div class="inpt-inline bz">
+					<label>备注:</label>
+					<input type="text" name="" id="" value="" />
+				</div>
+				<div class="inpt-inline">
+					<a class="sm-bnt" href="javascript:;">扫码入库</a>
+				</div>
+			</div>
+			<div class="tab-box">
+				<table class="layui-table">
+				    <colgroup>
+				      <col>
+				      <col>
+				      <col width="150">
+				      <col>
+				    </colgroup>
+				    <thead>
+				      <tr>
+				        <th>序号</th>
+				        <th>操作</th>
+				        <th>货号</th>
+				        <th>品名</th>
+				        <th>规格</th>
+				        <th>单位</th>
+				        <th>数量</th>
+				        <th>系统库存</th>
+				        <th>亏盈数量</th>
+				        <th>零售单价</th>
+				        <th>亏盈售价</th>
+				        <th>备注</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				        <tr>
+					        <td>1</td>
+					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
+					        <td>
+					        	<select name="">
+					        		<option value=""></option>
+					        		<option value="">001</option>
+					        		<option value="">002</option>
+					        		<option value="">003</option>
+					        		<option value="">004</option>
+					        		<option value="">005</option>
+					        	</select>
+					        </td>
+					        <td>前进牌特大号杯子</td>
+					        <td>1.5L</td>
+					        <td>个</td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0"/></td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td> </td>
+				        </tr>
+				    	<tr>
+					        <td>1</td>
+					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
+					        <td>
+					        	<select name="">
+					        		<option value=""></option>
+					        		<option value="">001</option>
+					        		<option value="">002</option>
+					        		<option value="">003</option>
+					        		<option value="">004</option>
+					        		<option value="">005</option>
+					        	</select>
+					        </td>
+					        <td>前进牌特大号杯子</td>
+					        <td>1.5L</td>
+					        <td>个</td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0"/></td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td>拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解 </td>
+				        </tr>
+				        <tr>
+					        <td>1</td>
+					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
+					        <td>
+					        	<select name="">
+					        		<option value=""></option>
+					        		<option value="">001</option>
+					        		<option value="">002</option>
+					        		<option value="">003</option>
+					        		<option value="">004</option>
+					        		<option value="">005</option>
+					        	</select>
+					        </td>
+					        <td>前进牌特大号杯子</td>
+					        <td>1.5L</td>
+					        <td>个</td>
+					        <td><input type="number" min="0" name="" id="" value="" placeholder="0"/></td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td>0.00</td>
+					        <td> </td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
+			<a class="bnt-bc" href="javascript:;">保存</a>
+		</form>
+	</div>
+    <!--不可编辑-->
+    <div id="Non-editable" class="Non-editable">
+    	<p>当前不可选择批量编辑</p>
+    	<a class="qd-bnt" href="javascript:;">确定</a>
+    </div>
+    <!--用户管理-新增-->
+    <div id="user-xz" class="user-xz">
+    	<form class="layui-form" action="">
+	    	<div class="blockbox2">
+	    		<div class="ipt-inline">
+	    			<label>*用户名:</label>
+	    			<input type="" name="" disabled="true"  value="002" />
+	    		</div>
+	    		<div class="ipt-inline">
+	    			<label>密码:</label>
+	    			<input type="password" name="" />
+	    		</div>
+	    		<div class="ipt-inline">
+	    			<label>姓名:</label>
+	    			<input type="" name=""  value="002" />
+	    		</div>
+	    		<div class="ipt-inline">
+	    			<label>姓名:</label>
+	    			<input type="" name=""  value="002" />
+	    		</div>
+	    	</div>
+    	</form>
+    </div>
+    <script src="../js/common/common.js"></script>
+    <script src="../js/common/jquery-3.3.1.min.js"></script>
+	<script src="../js/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/pop.js" type="text/javascript" charset="utf-8"></script>
+	
+</body>
+</html>

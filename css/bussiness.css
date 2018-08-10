@@ -1,0 +1,82 @@
+.cmsearch{
+    background-color: #f9f9fb;
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+    padding: 1rem 5rem;
+    display: none;
+}
+.highsearch{
+    cursor: pointer;
+    padding: 0 1rem;
+}
+.highsearch.show{
+    background:#f9f9fb;
+}
+.cmsearch li{
+    float: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.cmsearch li label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.cmsearch ul{
+    height: 3rem;
+    line-height: 3rem;
+}
+.cmsearch li input,.cmsearch>div:last-child input{
+    height: 1.8rem;
+    border: 1px solid transparent;
+    background-color: #eaeaed;
+    border-radius: 0.4rem;
+    margin: 0 .2rem;
+    padding-left: .6rem;
+}
+.cmsearch>div:first-child{
+}
+.cmsearch>div:last-child{
+
+}
+
+.cmsearch>div:last-child button{
+    width: 5rem;
+    height: 2rem;
+    line-height: 2rem;
+    cursor: pointer;
+}
+.cmsearch>div:last-child button:nth-child(2){
+    background-color: #808dff;
+    border-radius: .5rem;
+    border: solid 1px #afb2cd;
+    color: #ffffff;
+    margin-left: 1rem;
+}
+.cmsearch>div:last-child button:nth-child(3){
+    border-radius: .5rem;
+    border: solid 1px #afb2cd;
+    color: #7b7fa4;
+}
+.content{
+    height: 36rem;
+    overflow-y: scroll;
+}
+.tab{
+    width: 100%;
+}
+.tab span{
+    display: inline-block;
+    width: calc(50% - 2px);
+    text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+    border: solid 1px #dcdcdc;
+    border-bottom: none;
+    cursor: pointer;
+}
+.tab span.active{
+    background: #f9f9fb;
+    color: #808dff;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础数据-商品类别</title>
+    <link rel="stylesheet" href="../css/common/common.css">
+    <link rel="stylesheet" href="../css/data.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+    <script src="../js/common/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="../js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <div class="cont">
+    	<div class="edit">
+    		<div class="flex">
+    			<div class="edit-inline">
+	    			<img src="../img/data/tj-bg.png"/>
+	    			<span>新增</span>
+	    		</div>
+	    		<div class="edit-inline">
+	    			<img src="../img/data/bj-bg.png"/>
+	    			<span>编辑</span>
+	    		</div>
+	    		<div class="edit-inline">
+	    			<img src="../img/data/sc-bg.png"/>
+	    			<span>删除</span>
+	    		</div>
+    		</div>
+	    		
+    		<div class="int">
+    			<input type="search" id="myInput" aria-controls="example" placeholder="输入编码/名称进行查询" />
+    			<label id="active-bnt" for="#myInput">查询</label>
+    		</div>
+    	</div>
+    	
+		<table id="example"  width="100%">
+			<thead>
+				<tr>
+					<th width="15%"><input type="checkbox" name="" /></th>
+					<th width="15%">序号</th>
+					<th width="15%">编码</th>
+					<th>名称</th>
+				</tr>
+			</thead>
+			<tbody class="box-cont">
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>1</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>2</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>3</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>4</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>1</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>2</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>3</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>4</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>1</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>2</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>3</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="" /></td>
+					<td>4</td>
+					<td>NCOO123</td>
+					<td>工艺品</td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+   
+    <script type="text/javascript">
+   	$(document).ready(function(){
+	    $('#example').dataTable( {
+	        "paging":   false,
+	        "ordering": false,
+	        "info":     false
+	    } );
+	    var table = $('#example').DataTable();
+		var info = table.page.info({
+		    "page": 1,
+		    "pages": 6,
+		    "start": 5,
+		    "end": 20,
+		    "length": 5,
+		    "recordsTotal": 57,
+		    "recordsDisplay": 57
+		});
+		$('#myInput').on( 'keyup', function () {
+		    table.search( this.value ).draw();
+		});
+   	});
+	    
+		
+
+    </script>
+</body>
+</html>

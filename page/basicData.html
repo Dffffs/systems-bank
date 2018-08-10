@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/common/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../css/basicData.css">
+    <link rel="stylesheet" href="../css/common/common.css">
+</head>
+<body>
+    <div id="contain">
+        <div class="title">
+            <p>列表</p>
+        </div>
+        <div class="content">
+            <div class="button">
+                <div class="add">
+                    <img src="../img/basicData/添加_Add@2x.png" alt="">
+                    <span>新增</span>
+                </div>
+                <div class="change">
+                    <img src="../img/basicData/编辑@2x.png" alt="">
+                    <span>编辑</span>
+                </div>
+                <div class="del">
+                    <img src="../img/basicData/删除@2x.png" alt="">
+                    <span>删除</span>
+                </div>
+                <div class="search">
+                    <div>
+                        <select>
+                            <option value="">请选择商品类别</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="输入编码/名称进行查询">
+                        <input type="button" value="搜索">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <table id="tables"></table>
+                <div id="move"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/common/common.js"></script>
+    <script src="../js/common/jquery-3.3.1.min.js"></script>
+	<script src="../js/common/jquery.dataTables.min.js"></script>
+    <script src="../js/basicData.js"></script>
+	
+</body>
+</html>

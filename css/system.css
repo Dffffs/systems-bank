@@ -1,0 +1,92 @@
+.password{
+    padding: 5rem 1rem;
+    background: white;
+    display: none;
+}
+.power{
+    background: white;
+    padding: 1rem 2rem;
+    display: none;
+
+}
+.power>div{
+    display: flex;
+    flex-direction: row;
+}
+.power>div>div:last-child{
+    flex: 1;
+}
+.power table{
+    width: 100%;
+    text-align: center;
+    border: solid 1px #dcdcdc;
+    border-radius: .5rem;
+}
+.power th:first-child{
+    border-left: none;
+}
+.power tr td{
+    border-right: solid 1px #dcdcdc;
+    border-bottom: solid 1px #dcdcdc;
+    padding: .5rem 0;
+}
+.power tr td:last-child{
+    border-right: none;
+}
+.power tr:nth-child(9) td:nth-child(1),.power tr:last-child td:nth-child(1),.power tr:last-child td:nth-child(2),.power tr:last-child td:nth-child(3){
+    border-bottom: none;
+}
+.power tr:nth-child(2) td:first-child,.power tr:nth-child(6) td:first-child,.power tr:nth-child(8) td:first-child{
+    background: white;
+}
+.power th{
+    text-align: center;
+    border-left: solid 1px #dcdcdc;
+    border-bottom: solid 1px #dcdcdc;
+    background-color: #f9f9fb;
+}
+.power tbody tr:nth-child(even){
+    background-color: #f9f9fb;
+}
+.power .id{
+    width: 8rem;
+    float: left;
+    text-align: center;
+    height: 30rem;
+    background-color: #f9f9fb;
+    margin-right: 2rem;
+}
+.power p{
+    margin: 0;
+    padding: .5rem 0;
+    cursor: pointer;
+}
+.power p.active{
+    background-color: #eeeef3;
+    color: #808dff;
+}
+.password input[type='text'],.password input[type='password']{
+    height: 1.8rem;
+    border: 1px solid transparent;
+    background-color: #eaeaed;
+    border-radius: 0.4rem;
+    margin: 0 .2rem;
+    padding-left: .6rem;
+}
+.password input[type='button']{
+    background-color: #808dff;
+    border-radius: 1rem;
+    border: 1px solid transparent;
+    color: white;
+    width: 3rem;
+    padding: .2rem 0rem;
+    text-align: center;
+    display: inline-block;
+    width: 5rem;
+    cursor: pointer;
+}
+.password div{
+    margin-bottom: 1rem;
+    width: 40%;
+    text-align: right;
+}
