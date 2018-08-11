@@ -10,11 +10,80 @@ function closeThisPop(index){
     $('body',parent.document).find('.pop').hide();
 }
 
-function changeCol(col,data){
-    var canCol = JSON.parse(sessionStorage.getItem('table'));
-    for (var i=0;i<canCol.length;i++){
-        $(col).find('td:nth-child('+canCol[i]+')').text(data[i])
+// function changeCol(col,data){
+//     var canCol = JSON.parse(sessionStorage.getItem('table'));
+//     for (var i=0;i<canCol.length;i++){
+//         $(col).find('td:nth-child('+canCol[i]+')').text(data[i])
+//     }
+// }
+//选择框内容函数
+function selectContent(result) {
+    $.ajax({//商品类别
+        url:apiUrl + 'article_type/query_article_type',
+        type:'GET',
+        success:function(res){
+            $.ajax({//商品单位
+                url:apiUrl + 'article_unit/query_article_unit',
+                type:'GET',
+                success:function(res){
+                    $.ajax({//供应商
+                        url:apiUrl + 'supplier/query_supplier',
+                        type:'GET',
+                        success:function (res) {
+                            $.ajax({
+                                url:apiUrl + 'article_brand/query_article_brand',
+                                type:'GET',
+                                success:function (res) {
+
+                                    var html = '<option value=""></option>';
+                                    for (var i=0;i<res.data.length;i++){
+                                        html += '<option value="'+res.data[i].brandNo+'">'+res.data[i].brandName+'</option>'
+                                    }
+                                    $('#more8 select').html(html);
+                                    fixed(result);
+                                }
+                            });
+                            var html = '<option value=""></option>';
+                            for (var i=0;i<res.data.length;i++){
+                                html += '<option value="'+res.data[i].supplierNo+'">'+res.data[i].supplierName+'</option>'
+                            }
+                            $('#more4 select').html(html);
+                        }
+                    });
+                    var html = '<option value=""></option>';
+                    for (var i=0;i<res.data.length;i++){
+                        html += '<option value="'+res.data[i].unitNo+'">'+res.data[i].unitName+'</option>'
+                    }
+                    $('#basic5 select').html(html);
+                }
+            });
+            var html = '<option value=""></option>';
+            for (var i=0;i<res.data.length;i++){
+                html += '<option value="'+res.data[i].typeNo+'">'+res.data[i].typeName+'</option>'
+            }
+            $('#basic4 select').html(html);
+        }
+    });
+
+    function fixed(result){
+        if (result){
+            var datas = result.data;
+            $('#basic1').val(datas.articleName);
+            $('#more4 select').val(datas.specification);
+            $('#more1').val(datas.shortenedForm);
+            $('#basic3').val(datas.purchasingPrice);
+            $('#basic4 select').val(datas.articleTypeNo);
+            $('#more8 select').val(datas.articleBrandNo);
+            $('#basic5 select').val(datas.articleUnitNo);
+            $('#more6 select').val(datas.status);
+            $('#more5').val(datas.shelfLifeDays);
+            $('#fileImage').val(datas.imagesLink);
+            $('#more7').val(datas.description);
+            $('#more3').val(datas.dateInProduced);
+        }
+
     }
+
 }
 //基础数据新增弹窗 -
 function openit(table){
@@ -28,50 +97,7 @@ function openit(table){
     }else if(juge == '商品信息'){
         content = $('#xz-box');
         area = ['89rem', '47rem'];
-        $.ajax({//商品类别
-            url:apiUrl + 'article_type/query_article_type',
-            type:'GET',
-            success:function(res){
-                var html = '<option value=""></option>';
-                for (var i=0;i<res.data.length;i++){
-                    html += '<option value="'+res.data[i].typeNo+'">'+res.data[i].typeName+'</option>'
-                }
-                $('#basic4 select').html(html);
-            }
-        });
-        $.ajax({//商品单位
-            url:apiUrl + 'article_unit/query_article_unit',
-            type:'GET',
-            success:function(res){
-                var html = '<option value=""></option>';
-                for (var i=0;i<res.data.length;i++){
-                    html += '<option value="'+res.data[i].unitNo+'">'+res.data[i].unitName+'</option>'
-                }
-                $('#basic5 select').html(html);
-            }
-        });
-        $.ajax({//供应商
-            url:apiUrl + 'supplier/query_supplier',
-            type:'GET',
-            success:function (res) {
-                var html = '<option value=""></option>';
-                for (var i=0;i<res.data.length;i++){
-                    html += '<option value="'+res.data[i].supplierNo+'">'+res.data[i].supplierName+'</option>'
-                }
-                $('#more4 select').html(html);
-            }
-        });
-        $.ajax({
-            url:apiUrl + 'article_brand/query_article_brand',
-            type:'GET',
-            success:function (res) {
-                var html = '<option value=""></option>';
-                for (var i=0;i<res.data.length;i++){
-                    html += '<option value="'+res.data[i].brandNo+'">'+res.data[i].brandName+'</option>'
-                }
-                $('#more8 select').html(html);
-            }
-        })
+        selectContent();
     }else{
         content = '编码: <input class="new-code"/> <br /> 单位:<input class="unit">'
     };
@@ -105,14 +131,13 @@ function openit(table){
                 };
             }else if(juge == '商品信息'){
                 url += 'article/save_article';
-                content = $('#xz-box');
                 data = {
                     articleName:$('#basic1').val(),
                     specification:$('#more4 select').val(),
                     shortenedForm:$('#more1').val(),
                     purchasingPrice:$('#basic3').val()*100,//进价
                     articleTypeNo:$('#basic4 select').val(),
-                    articleBrandNo:$('#more2').val(),
+                    articleBrandNo:$('#more8 select').val(),
                     articleUnitNo:$('#basic5 select').val(),
                     status:'01',//$('#more4 input').val(),
                     shelfLifeDays:$('#more5').val(),
@@ -166,9 +191,14 @@ function getSome(code,content,area,choose){
             articleBarcode:code
         },
         success:function (res) {
-            console.log(res);
-            var data = res.data;
-
+            selectContent(res);
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#more3',
+                });
+            });
             layer.open({
                 type: 1,
                 closeBtn: 1,
@@ -177,12 +207,23 @@ function getSome(code,content,area,choose){
                 area: area,
                 content: content,
                 yes:function(index){
-                    var url = apiUrl + 'article/save_article';
+                    var url = apiUrl + 'article/modification_article';
+                    /**/
                     var data = {
-
+                        articleBarcode:res.data.articleBarcode,
+                        articleName:$('#basic1').val(),//
+                        specification:$('#more4 select').val(),
+                        shortenedForm:$('#more1').val(),//别称
+                        purchasingPrice:$('#basic3').val()*100,//进价
+                        articleTypeNo:$('#basic4 select').val(),//类别
+                        articleBrandNo:$('#more8 select').val(),//品名
+                        articleUnitNo:$('#basic5 select').val(),//单位
+                        status:$('#more6 select').val(),//商品状态
+                        shelfLifeDays:$('#more5').val(),
+                        imagesLink:$('#fileImage').val(),
+                        description:$('#more7').val(),
+                        dateInProduced:$('#more3').val()
                     };
-                    var arr = [];
-
                     $.post({
                         url:url,
                         headers: {
@@ -190,13 +231,13 @@ function getSome(code,content,area,choose){
                         },
                         data:JSON.stringify(data),
                         success:function(res){
-                            changeCol(choose,arr);//传入行,arr
+                            $('body',parent.document).find('.content iframe')[0].contentWindow.location.reload();
                             closeThisPop(index);
                         }
                     });
 
                 },
-                no:function(index){
+                btn2:function(index){
                     closeThisPop(index);
                 },
                 cancel: function(index, layero){
@@ -250,13 +291,13 @@ function notInfo(juge,content,area,choose){
                 },
                 data:JSON.stringify(data),
                 success:function(res){
-                    changeCol(choose,arr);//传入行,arr
+                    $('body',parent.document).find('.content iframe')[0].contentWindow.location.reload();
                     closeThisPop(index);
                 }
             });
 
         },
-        no:function(index){
+        btn2:function(index){
             closeThisPop(index);
         },
         cancel: function(index, layero){
@@ -285,8 +326,8 @@ function openbj(choose){
         notInfo(juge,content,area,choose);
     }else if(juge == '商品信息'){
         content = $('#xz-box');
-        var code = JSON.parse(choose.attr('value'))[0];
-        getSome(code,content,area,choose);
+        var code = JSON.parse(choose.attr('value'));
+        getSome(code[0],content,area,choose);
 
     }else{
         content = '编码: <input class="new-code" disabled="disabled" value='+value+'/> <br /> 单位:<input class="unit" value='+value1+'>'
@@ -302,8 +343,21 @@ function opengy(){
         title: ['供货商-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: ['42.4rem', '43.1rem'],
         content: $('#gy-pop'),
-        yes:function(index){
-            closeThisPop(index);
+        btn1:function(index){
+            var data = {
+
+            };
+            $.post({
+                url:apiUrl + 'supplier/save_supplier',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data:JSON.stringify(data),
+                success:function(res){
+                    closeThisPop(index);
+                }
+            });
+
         },
         btn2:function(index){
             closeThisPop(index);
@@ -403,15 +457,14 @@ function openrk(){
         content: $('#storage-pop'),
         /*入库新增增加删除*/
        	success: function(layero, index){
-
        	    //查询所有货号
        	    $.ajax({
                 url:apiUrl + 'article/queryArticleList',
                 success:function(res){
                     var html = '<option value="">请选择</option>';
-                   for (var i=0;i<res.data.length;i++){
-                       html += '<option value="'+res.data[i].articleBarcode+'">'+res.data[i].articleBarcode+'</option>'
-                   }
+                    for (var i=0;i<res.data.length;i++){
+                        html += '<option value="'+res.data[i].articleBarcode+'">'+res.data[i].articleBarcode+'</option>'
+                    }
                     var tbody = $('#tab-box').find('.tab-body');
                     tbody.find('tr:first-child select').html(html);
                     addcontent(res.data);
@@ -453,11 +506,12 @@ function openrk(){
 		    });
 
 		},
-		/*function rkadd(){
-			$('#tab-box').on('click','button.jia',function () {
-		        console.log(111)
-		    });
-		}rkadd()*/
+        btn1:function(index){
+            closeThisPop(index);
+        },
+		btn2:function(index){
+            closeThisPop(index);
+        },
         cancel: function(index, layero){
             closeThisPop(index);
 		}

@@ -99,19 +99,21 @@
         $('.button .add,.button .change,.button .del').click(function () {
             var text = $(this).find('span').text();
             var es = $('body',parent.document).find('.pop iframe')[0].contentWindow;
-            $('body',parent.document).find('.pop').show();
+
             if (text == '新增'){
                 es.openit(table);
+                $('body',parent.document).find('.pop').show();
             }else if(text == '编辑'){
                 if ($('#tables .choose').length>1){
                     alert('暂时不支持多行编辑')
                 } else{
                     es.openbj($('#tables .choose'));
+                    $('body',parent.document).find('.pop').show();
                 }
-
             } else if(text == '删除'){
                 // table.row('.choose').remove().draw( false );
                 es.opendel(table,$('#tables .choose'));
+                $('body',parent.document).find('.pop').show();
             }else{
 
             }

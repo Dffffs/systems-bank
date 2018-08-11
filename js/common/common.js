@@ -23,7 +23,9 @@ function buildTbody(arr,want) {
     var html = '<tbody>';
     arr.forEach(function(value,index){
         if (want){
-            html += '<tr value='+JSON.stringify(value)+'><td><input type="checkbox"></td>';
+            var vs = "'"+JSON.stringify(value)+"'";
+            html += "<tr value="+(vs)+"><td><input type=\"checkbox\"></td>";
+            //html += '<tr value="'+(JSON.stringify(value))+'"><td><input type="checkbox"></td>';
         }
         value.forEach(function (values,indexs) {
             html += '<td>'+values+'</td>';
