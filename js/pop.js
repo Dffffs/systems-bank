@@ -586,3 +586,18 @@ function openuserbj(){
         }
     });
 }
+
+/*商品信息详情*/
+function opendetails(){
+    var juge = sessionStorage.getItem('topText');
+    layer.open({
+        type: 1,
+        closeBtn: 1,
+        title: ['商品信息详情', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        area: '80rem',
+        content: $('details'),
+        cancel: function(index, layero){
+            closeThisPop(index);
+        }
+    });
+}
