@@ -224,35 +224,32 @@
 	<div id="gy-pop" class="gy-pop">
 		<form class="layui-form" action="">
 			<div class="blockbox">
-				<label><span>*</span>编码:</label><input type="" name="supplierNo" id="" value=""/>
+				<label><span>*</span>编码:</label><input type="" name="supplierNo" id="buyCode" value=""/>
 			</div>
 			<div class="blockbox">
-				<label><span>*</span>名称:</label><input type="" name="supplierName" id="" value=""/>
+				<label><span>*</span>名称:</label><input type="" name="supplierName" id="buyName" value=""/>
 			</div>
 			<div class="blockbox">
 				<label><span>*</span>状态:</label>
 				<div class="layui-input-block">
-			        <select name="status" lay-verify="required">
+			        <select name="status" lay-verify="required" id="buySelect">
 				        <option value=""></option>
-				        <option value="0">状态1</option>
-				        <option value="1">状态2</option>
-				        <option value="2">状态3</option>
-				        <option value="3">状态4</option>
-				        <option value="4">状态5</option>
+						<option value="01">启用</option>
+						<option value="02">停用</option>
 			        </select>
 			    </div>
 			</div>
 			<div class="blockbox">
-				<label>联系人:</label><input type="" name="" id="" value=""/>
+				<label>联系人:</label><input type="" name="" id="buyPeople" value=""/>
 			</div>
 			<div class="blockbox">
-				<label>联系电话:</label><input type="" name="" id="" value=""/>
+				<label>联系电话:</label><input type="" name="" id="buyPhone" value=""/>
 			</div>
 			<div class="blockbox">
-				<label>联系地址:</label><textarea></textarea>
+				<label>联系地址:</label><textarea id="buyAddress"></textarea>
 			</div>
 			<div class="blockbox">
-				<label>说明:</label><textarea></textarea>
+				<label>说明:</label><textarea id="buy"></textarea>
 			</div>
 			<!--<div class="gybnt">
 				<a class="save" href="javascript:;">保存并新增</a>

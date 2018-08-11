@@ -344,8 +344,21 @@ function opengy(){
         area: ['42.4rem', '43.1rem'],
         content: $('#gy-pop'),
         btn1:function(index){
+            /*"supplierName":"石燕湖水街",//供货商名称
+	"contactAddress":"湖南省长沙市石燕湖景区",//供货商编号
+	"contactsName":"石燕湖",
+	"phone":"13032094388",
+	"status":"01",
+	"description":"石燕湖景区",
+	"supplierNo":"0001"*/
             var data = {
-
+                supplierName:'',
+                contactAddress:'',
+                contactsName:'',
+                phone:'',
+                status:'',
+                description:'',
+                supplierNo:''
             };
             $.post({
                 url:apiUrl + 'supplier/save_supplier',
