@@ -22,9 +22,9 @@ function openit(table){
     var content;
     var area = ['60rem', '25rem'];
     if (juge == '商品类别'){
-        content = '<div>编码: <input class="new-code"/></div> <br /><div> 名称:<input class="unit"></div>'
+        content = '<div class="new-box mt2">编码: <input class="new-code"/></div> <br /><div class="new-box"> 名称:<input class="unit"></div>'
     }else if(juge == '商品品牌'){
-        content = '编码: <input class="new-code"/> <br /> 名称:<input class="unit">'
+        content = '<div class="new-box mt2">编码: <input class="new-code"/></div> <br /><div class="new-box"> 名称:<input class="unit"></div>'
     }else if(juge == '商品信息'){
         content = $('#xz-box');
         area = ['89rem', '47rem'];
@@ -73,7 +73,7 @@ function openit(table){
             }
         })
     }else{
-        content = '编码: <input class="new-code"/> <br /> 单位:<input class="unit">'
+        content = '<div class="new-box mt2">编码: <input class="new-code"/></div> <br /><div class="new-box"> 名称:<input class="unit"></div>'
     };
 	layer.open({
         type: 1,
@@ -123,8 +123,8 @@ function openit(table){
             }else{
                 url += 'article_unit/save_article_unit';
                 data = {
-                    unitName:$('.new-code').val(),
-                    unitNo:$('.unit').val()
+                    unitName:$('.unit').val(),
+                    unitNo:$('.new-code').val()
                 };
             };
             $.post({
@@ -275,13 +275,13 @@ function openbj(choose){
     }else{
         var value = choose.find('td:nth-child(2)').text();
         var value1 = choose.find('td:nth-child(3)').text();
-        area = ['62rem', '20rem'];
+        area = ['62rem', '25rem'];
     }
     if (juge == '商品类别'){
-        content = '编码: <input class="new-code" disabled="disabled" value='+value+'/> <br /> 名称:<input class="unit" value='+value1+'>'
+        content = '<div class="new-box mt2">编码: <input class="new-code" disabled="disabled" value='+value+'/> </div><br /> <div class="new-box">名称:<input class="unit" value='+value1+'></div>'
         notInfo(juge,content,area,choose);
     }else if(juge == '商品品牌'){
-        content = '编码: <input class="new-code" disabled="disabled" value='+value+'/> <br /> 名称:<input class="unit" value='+value1+'>'
+        content = '<div class="new-box mt2">编码: <input class="new-code" disabled="disabled" value='+value+'/></div><br /> <div class="new-box">名称:<input class="unit" value='+value1+'></div>'
         notInfo(juge,content,area,choose);
     }else if(juge == '商品信息'){
         content = $('#xz-box');
@@ -289,7 +289,7 @@ function openbj(choose){
         getSome(code,content,area,choose);
 
     }else{
-        content = '编码: <input class="new-code" disabled="disabled" value='+value+'/> <br /> 单位:<input class="unit" value='+value1+'>'
+        content = '<div class="new-box mt2">编码: <input class="new-code" disabled="disabled" value='+value+'/> </div><br /> <div class="new-box"> 单位:<input class="unit" value='+value1+'></div>'
         notInfo(juge,content,area,choose);
     };
 
@@ -378,7 +378,7 @@ function addcontent(data) {
         for (var i=0 ;i<data.length;i++){
             if(data[i]['articleBarcode'] == value){
                 tr.find('td:nth-child(4)').html('<span>'+data[i]['articleBrandName']+'</span>');
-                tr.find('td:nth-child(5)').html('<span>未填写</span>');
+                tr.find('td:nth-child(5)').html('<span>'+data[i]['specification']+'</span>');
                 tr.find('td:nth-child(6)').html('<span>'+data[i]['articleUnitName']+'</span>');
                 tr.find('td:nth-child(7)').html('<input class="num" type="number" value="0" min="0">');
                 tr.find('td:nth-child(8)').html('<input class="num" type="number" value="0" min="0">');
