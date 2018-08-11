@@ -122,7 +122,7 @@ tbody .layui-form-select dl{
 .layui-form-select dl dd.layui-this{background-color: #808dff;}
 .storage-pop .bnt-bc{margin-top: 2.6rem;}
 tbody input[type=number]{width: 5rem;text-align: center;color: #808dff;}
-.tab-body select.sele{border: 0!important;width: 100%;font-size: 0.9rem;background-color: rgba(0,0,0,0);letter-spacing:1px;}
+.tab-body select.sele{border: 0!important;width: 100%;line-height: 1.2rem;height: 1.2rem; font-size: 0.9rem;background-color: rgba(0,0,0,0);letter-spacing:1px;}
 .tab-body select.sele option{letter-spacing:1px;}
 .stock-pop{width: 89.4rem;padding: 2.5rem 0 10rem;display: none;}
 .xg-box{width: 89rem;display: none;}

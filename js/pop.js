@@ -22,7 +22,7 @@ function openit(table){
     var content;
     var area = ['60rem', '25rem'];
     if (juge == '商品类别'){
-        content = '编码: <input class="new-code"/> <br /> 名称:<input class="unit">'
+        content = '<div>编码: <input class="new-code"/></div> <br /><div> 名称:<input class="unit"></div>'
     }else if(juge == '商品品牌'){
         content = '编码: <input class="new-code"/> <br /> 名称:<input class="unit">'
     }else if(juge == '商品信息'){
@@ -298,9 +298,16 @@ function opengy(){
 	layer.open({
         type: 1,
         closeBtn: 1,
+        btn:['确定','取消'],
         title: ['供货商-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: ['42.4rem', '43.1rem'],
         content: $('#gy-pop'),
+        yes:function(index){
+            closeThisPop(index);
+        },
+        btn2:function(index){
+            closeThisPop(index);
+        },
         cancel: function(index, layero){
             closeThisPop(index);
 		}
@@ -364,53 +371,87 @@ function opendel(table,row){
 		}
     });
 }
+function addcontent(data) {
+    $('#tab-box .tab-body').unbind('change').on('change','.sele',function(){
+        var value = $(this).val();
+        var tr = $(this).parent().parent();
+        for (var i=0 ;i<data.length;i++){
+            if(data[i]['articleBarcode'] == value){
+                tr.find('td:nth-child(4)').html('<span>'+data[i]['articleBrandName']+'</span>');
+                tr.find('td:nth-child(5)').html('<span>未填写</span>');
+                tr.find('td:nth-child(6)').html('<span>'+data[i]['articleUnitName']+'</span>');
+                tr.find('td:nth-child(7)').html('<input class="num" type="number" value="0" min="0">');
+                tr.find('td:nth-child(8)').html('<input class="num" type="number" value="0" min="0">');
+                tr.find('td:nth-child(9)').html('<input type="number" value="0" min="0">');
+                tr.find('td:nth-child(10)').html('<span>0</span>');
+            }
+        }
+    });
+    $('#tab-box .tab-body').unbind('keyup').on('keyup','.num',function(){
+       var num = Number($(this).val()) * Number($(this).parent().parent().find('.num').not(this).val());
+       $(this).parent().parent().find('td:last-child').text(num);
+    });
+}
 /*入库新增*/
 function openrk(){
 	layer.open({
         type: 1,
         closeBtn: 1,
+        btn:['确定','取消'],
         title: ['入库-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '89.4rem', 
         content: $('#storage-pop'),
         /*入库新增增加删除*/
        	success: function(layero, index){
-       		var tbody = $('#tab-box').find('.tab-body')
-		    $('#tab-box').on('click','button.jia',function () {
-		        tbody.append(
-		        	'<tr>'+
-				        '<td>1</td>'+
-				        '<td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>'+
-				        '<td>'+
-				        	'<select class="sele" name="">'+
-				        		'<option value="">请选择</option>'+
-				        		'<option value="">001</option>'+
-				        		'<option value="">002</option>'+
-				        		'<option value="">003</option>'+
-				        		'<option value="">004</option>'+
-				        		'<option value="">005</option>'+
-				        	'</select>'+
-				        '</td>'+
-				        '<td></td>'+
-				        '<td></td>'+
-				        '<td></td>'+
-				        '<td><input type="number" min="0" name="" id="" value=""/></td>'+
-				        '<td><input type="number" min="0" name="" id="" value=""/></td>'+
-				        '<td><input type="number" min="0" name="" id="" value=""/></td>'+
-				        '<td></td>'+
-			        '</tr>'
-		        )
-		      /*  layui.use(['layer', 'form'], function(){
-					var layer = layui.layer;
-					var form = layui.form;
-					var table = layui.table;
-					form.render('select');
-				});*/
-		    });
-		    $('#tab-box').on('click','button.jian',function () {
 
-		    	 var o=$(this).parent().parent()
-		    	 o.empty()
+       	    //查询所有货号
+       	    $.ajax({
+                url:apiUrl + 'article/queryArticleList',
+                success:function(res){
+                    var html = '<option value="">请选择</option>';
+                   for (var i=0;i<res.data.length;i++){
+                       html += '<option value="'+res.data[i].articleBarcode+'">'+res.data[i].articleBarcode+'</option>'
+                   }
+                    var tbody = $('#tab-box').find('.tab-body');
+                    tbody.find('tr:first-child select').html(html);
+                    addcontent(res.data);
+                    $('#tab-box').on('click','button.jia',function () {
+                        var indexs = $('#tab-box tbody tr').length + 1;
+                        var s = tbody.append(
+                            '<tr>'+
+                            '<td>'+(indexs)+'</td>'+
+                            '<td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>'+
+                            '<td>'+
+                            '<select class="sele" name="">'+ html+
+                            '</select>'+
+                            '</td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+                            '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+                            '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+                            '<td></td>'+
+                            '</tr>');
+
+                    });
+                }
+            });
+		    $('#tab-box').on('click','button.jian',function () {
+                var o=$(this).parent().parent();
+		        if(o.parent().find('tr').length === 1){
+		            alert('不能删除最后一条信息')
+                }else{
+                    var tdlength = $(o).nextAll().find('td:first-child');
+                    for (var i=0;i<tdlength.length;i++){
+                        $(tdlength[i]).text($(tdlength[i]).text()-1)
+                    }
+                    o.remove();
+                }
+
+
 		    });
+
 		},
 		/*function rkadd(){
 			$('#tab-box').on('click','button.jia',function () {

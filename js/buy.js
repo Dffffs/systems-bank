@@ -100,7 +100,7 @@
             var e = $('body',parent.document).find('.pop iframe')[0].contentWindow;
             $('body',parent.document).find('.pop').show();
             if (text == '新增'){
-                if (fakeData.topText=="供应商"){
+                if (fakeData.topText=="供货商"){
                     e.opengy(table);
                 } else{
                     e.openrk(table);
