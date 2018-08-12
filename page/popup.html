@@ -346,11 +346,11 @@
 	</div>
 	<!--库存管理-新增-->
 	<div id="stock-pop" class="stock-pop" >
-		<form class="layui-form" action="">
+		<form action="">
 			<div class="flex-block">
 				<div class="inpt-inline bz">
 					<label>备注:</label>
-					<input type="text" name="" id="" value="" />
+					<input type="text" name="" id="stocktext" value="" />
 				</div>
 				<div class="inpt-inline">
 					<a class="sm-bnt" href="javascript:;">扫码入库</a>
@@ -372,11 +372,11 @@
 				        <th>品名</th>
 				        <th>规格</th>
 				        <th>单位</th>
-				        <th>数量</th>
+				        <th>盘点数量</th>
 				        <th>系统库存</th>
 				        <th>亏盈数量</th>
-				        <th>零售单价</th>
-				        <th>亏盈售价</th>
+				        <th>进价</th>
+				        <th>亏盈进价</th>
 				        <th>备注</th>
 				      </tr>
 				    </thead>
@@ -385,70 +385,19 @@
 					        <td>1</td>
 					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
 					        <td>
-					        	<select name="">
+					        	<select name="" class="sele">
 					        		<option value=""></option>
-					        		<option value="">001</option>
-					        		<option value="">002</option>
-					        		<option value="">003</option>
-					        		<option value="">004</option>
-					        		<option value="">005</option>
 					        	</select>
 					        </td>
-					        <td>前进牌特大号杯子</td>
-					        <td>1.5L</td>
-					        <td>个</td>
-					        <td><input type="number" min="0" name="" id="" value="" placeholder="0"/></td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td> </td>
-				        </tr>
-				    	<tr>
-					        <td>1</td>
-					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
-					        <td>
-					        	<select name="">
-					        		<option value=""></option>
-					        		<option value="">001</option>
-					        		<option value="">002</option>
-					        		<option value="">003</option>
-					        		<option value="">004</option>
-					        		<option value="">005</option>
-					        	</select>
-					        </td>
-					        <td>前进牌特大号杯子</td>
-					        <td>1.5L</td>
-					        <td>个</td>
-					        <td><input type="number" min="0" name="" id="" value="" placeholder="0"/></td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td>拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解拉据了解 </td>
-				        </tr>
-				        <tr>
-					        <td>1</td>
-					        <td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>
-					        <td>
-					        	<select name="">
-					        		<option value=""></option>
-					        		<option value="">001</option>
-					        		<option value="">002</option>
-					        		<option value="">003</option>
-					        		<option value="">004</option>
-					        		<option value="">005</option>
-					        	</select>
-					        </td>
-					        <td>前进牌特大号杯子</td>
-					        <td>1.5L</td>
-					        <td>个</td>
-					        <td><input type="number" min="0" name="" id="" value="" placeholder="0"/></td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td>0.00</td>
-					        <td> </td>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        <td><input type="number" min="0" name="" class="stocknum" value="" placeholder="0"/></td>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        <td></td>
+					        <td><textarea class="stockarea"></textarea></td>
 				        </tr>
 				    </tbody>
 				</table>
@@ -463,24 +412,24 @@
     </div>
     <!--用户管理-新增-->
     <div id="user-xz" class="user-xz">
-    	<form class="layui-form" action="">
+    	<form action="">
 	    	<div class="blockbox2">
 	    		<div class="fl">
 	    			<div class="ipt-inline">
 		    			<label>*用户名:</label>
-		    			<input type="" name="" disabled="true"  value="002" />
+		    			<input type="" name="" class="username"/>
 		    		</div>
 		    		<div class="ipt-inline">
 		    			<label>姓名:</label>
-		    			<input type="" name=""  value="002" />
+		    			<input type="" name="" class="userinfo"/>
 		    		</div>
 		    		<div class="ipt-inline">
 		    			<label>是否收银员:</label>
 		    			<div class="layui-input-block">
-					        <select name=" " lay-verify="required">
+					        <select name=" " id="usermoney" lay-verify="required">
 						        <option value=""></option>
-						        <option value="0">是</option>
-						        <option value="1">否</option>
+						        <option value="1">是</option>
+						        <option value="2">否</option>
 						    </select>
 					    </div>
 		    		</div>
@@ -488,19 +437,16 @@
 		    	<div class="fr">
 		    		<div class="ipt-inline">
 		    			<label>密码:</label>
-		    			<input type="password" name="" />
+		    			<input type="password" name="" class="password"/>
 		    		</div>
 			    		
 		    		<div class="ipt-inline">
 		    			<label>状态:</label>
 		    			<div class="layui-input-block">
-					        <select name=" " lay-verify="required">
+					        <select name=" " lay-verify="required" class="userstatus">
 						        <option value=""></option>
-						        <option value="0">状态1</option>
-						        <option value="1">状态2</option>
-						        <option value="2">状态3</option>
-						        <option value="3">状态4</option>
-						        <option value="4">状态5</option>
+						        <option value="01">正常</option>
+						        <option value="02">停用</option>
 					        </select>
 					    </div>
 		    		</div>
@@ -508,10 +454,10 @@
 		    		<div class="ipt-inline">
 		    			<label>用户角色:</label>
 		    			<div class="layui-input-block">
-					        <select name=" " lay-verify="required">
+					        <select name=" " lay-verify="required" class="usertype">
 						        <option value=""></option>
-						        <option value="0">管理员1</option>
-						        <option value="1">管理员2</option>
+						        <option value="001">店长</option>
+						        <option value="002">收银</option>
 						    </select>
 					    </div>
 		    		</div>

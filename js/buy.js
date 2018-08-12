@@ -168,12 +168,15 @@
                     data:data,
                     success:function(res){
                         if (res.data){
-
                             if (fakeData.topText == '供货商'){
                                 fakeData.body = delData(res.data)
                             }else{
                                 fakeData.body = delData(res.data.data)
                             }
+                            table.destroy();
+                            createTable();
+                        }else{
+                            fakeData.body = [];
                             table.destroy();
                             createTable();
                         }

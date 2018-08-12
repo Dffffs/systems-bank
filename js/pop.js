@@ -407,10 +407,8 @@ function opendel(table,row){
                 url += 'article_unit/remove_article_unit';//post data = 编号
             }else if (topText=="供货商") {
                 url += 'supplier/remove_supplier';//post 供应商编号
-            }else if (topText=="用户管理") {
-
-            }else if (topText=="角色管理") {
-
+            }else if (topText=="用户管理"||topText=="角色管理") {
+                url += 'login_info/removeLogin'
             }
 
             $.post({
@@ -439,27 +437,52 @@ function opendel(table,row){
 		}
     });
 }
-function addcontent(data) {
-    $('#tab-box .tab-body').unbind('change').on('change','.sele',function(){
+function addcontent(select,data) {
+    select.unbind('change').on('change','.sele',function(){
         var value = $(this).val();
         var tr = $(this).parent().parent();
+        var head = JSON.parse(sessionStorage.getItem('head'));
         for (var i=0 ;i<data.length;i++){
             if(data[i]['articleBarcode'] == value){
-                tr.attr('value',JSON.stringify(data[i]))
-                tr.find('td:nth-child(4)').html('<span>'+data[i]['articleBrandName']+'</span>');
-                tr.find('td:nth-child(5)').html('<span>'+data[i]['specification']+'</span>');
-                tr.find('td:nth-child(6)').html('<span>'+data[i]['articleUnitName']+'</span>');
-                tr.find('td:nth-child(7)').html('<input class="num" type="number" value="0" min="0">');
-                tr.find('td:nth-child(8)').html('<input class="num" type="number" value="0" min="0">');
-                tr.find('td:nth-child(9)').html('<input type="number" value="0" min="0">');
-                tr.find('td:nth-child(10)').html('<span>0</span>');
+                tr.attr('value',JSON.stringify(data[i]));
+                if (head[1] != '零售价盈亏金额'){
+                    tr.find('td:nth-child(4)').html('<span>'+data[i]['articleBrandName']+'</span>');
+                    tr.find('td:nth-child(5)').html('<span>'+data[i]['specification']+'</span>');
+                    tr.find('td:nth-child(6)').html('<span>'+data[i]['articleUnitName']+'</span>');
+                    tr.find('td:nth-child(7)').html('<input class="num" type="number" value="0" min="0">');
+                    tr.find('td:nth-child(8)').html('<input class="num" type="number" value="0" min="0">');
+                    tr.find('td:nth-child(9)').html('<input type="number" value="0" min="0">');
+                    tr.find('td:nth-child(10)').html('<span>0</span>');
+                }else{
+                    var num = (data[i]['stockNum']==null?0:Number(data[i]['stockNum']));
+                    tr.find('td:nth-child(4)').html('<span>'+data[i]['articleBrandName']+'</span>');
+                    tr.find('td:nth-child(5)').html('<span>'+data[i]['specification']+'</span>');
+                    tr.find('td:nth-child(6)').html('<span>'+data[i]['articleUnitName']+'</span>');
+                    tr.find('td:nth-child(7)').html('<input class="stocknum" type="number" value="0" min="0">');
+                    tr.find('td:nth-child(8)').html('<span>'+num+'</span>');
+                    tr.find('td:nth-child(9)').html('<span>'+num+'</span>');
+                    tr.find('td:nth-child(10)').html('<span>'+data[i]['purchasingPrice']+'</span>');
+                    tr.find('td:nth-child(11)').html('<span>'+num * data[i]['purchasingPrice']+'</span>');
+                    tr.find('td:nth-child(12)').html('<textarea class="stockarea"></textarea>');
+                }
+
+
             }
         }
     });
-    $('#tab-box .tab-body').unbind('keyup').on('keyup','.num',function(){
+    select.unbind('keyup').on('keyup','.num',function(){
        var num = Number($(this).val()) * Number($(this).parent().parent().find('.num').not(this).val());
        $(this).parent().parent().find('td:last-child').text(num);
     });
+
+    /**/
+    select.unbind('keyup').on('keyup','.stocknum',function () {
+
+        var num = Number($(this).val()) - Number($(this).parent().parent().find('td:nth-child(8)').text());//盈亏数量
+        var value = num * Number($(this).parent().parent().find('td:nth-child(10)').text());//盈亏进价
+        $(this).parent().parent().find('td:nth-child(11)').text(value);
+        $(this).parent().parent().find('td:nth-child(9)').text(num);
+    })
 }
 /*入库新增*/
 function openrk(){
@@ -494,7 +517,7 @@ function openrk(){
                             }
                             var tbody = $('#tab-box').find('.tab-body');
                             tbody.find('tr:first-child select').html(html);
-                            addcontent(res.data.data);
+                            addcontent($('#tab-box .tab-body'),res.data.data);
                             $('#tab-box').on('click','button.jia',function () {
                                 var indexs = $('#tab-box tbody tr').length + 1;
                                 var s = tbody.append(
@@ -556,7 +579,7 @@ function openrk(){
                                 "articleId":value.articleId,// 商品id
                                 "num":num, //入库数量,
                                 "sellingPrice":sellingPrice * 100,//售价 (单位是“分”)
-                                "purchasingPrice":purchasingPrice,//进价(单位是“分”)
+                                "purchasingPrice":purchasingPrice * 100,//进价(单位是“分”)
                                 "amount":amount * 100//进价总金额(单位是“分”)
                             });
                         }
@@ -598,9 +621,113 @@ function openkc(){
 	layer.open({
         type: 1,
         closeBtn: 1,
+        btn:['确认','取消'],
         title: ['库存管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '89.4rem', 
         content: $('#stock-pop'),
+        success:function(index){
+            $.ajax({
+                url:apiUrl + 'article/queryArticleListPage',
+                data:{
+                    page:0,
+                    pageNum:9999
+                },
+                success:function(res){
+                    if (res.data){
+                        var html = '<option value="">请选择</option>';
+                        for (var i=0;i<res.data.data.length;i++){
+                            if (res.data.data[i]['stockNum'] != null){
+                                html += '<option value="'+res.data.data[i].articleBarcode+'">'+res.data.data[i].articleBarcode+'</option>'
+                            }
+                        }
+                        var tbody = $('#stock-pop tbody');
+                        tbody.find('tr:first-child select').html(html);
+                        addcontent(tbody,res.data.data);
+                        $('#stock-pop').on('click','button.jia',function () {
+                            var indexs = $('#stock-pop tbody tr').length + 1;
+                            var s = tbody.append(
+                                '<tr>'+
+                                '<td>'+(indexs)+'</td>'+
+                                '<td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>'+
+                                '<td>'+
+                                '<select class="sele" name="">'+ html+
+                                '</select>'+
+                                '</td>'+
+                                '<td></td>'+
+                                '<td></td>'+
+                                '<td></td>'+
+                                '<td><input type="number" min="0" name="" class="stocknum"  value=""/></td>'+
+                                '<td></td>'+
+                                '<td></td>'+
+                                '<td></td>'+
+                                '<td></td>'+
+                                '<td><textarea class="stockarea"></textarea></td>'+
+                                '</tr>');
+                        });
+                        $('#stock-pop').on('click','button.jian',function () {
+                            var o=$(this).parent().parent();
+                            if(o.parent().find('tr').length === 1){
+                                alert('不能删除最后一条信息')
+                            }else{
+                                var tdlength = $(o).nextAll().find('td:first-child');
+                                for (var i=0;i<tdlength.length;i++){
+                                    $(tdlength[i]).text($(tdlength[i]).text()-1)
+                                }
+                                o.remove();
+                            }
+                        });
+                    }////////////////
+                }
+            });
+
+        },
+        btn1:function(index){
+            var tr = $('#stock-pop tbody tr');
+            var TotalAmount = 0;
+            var totalProfitAndLossNum = 0;
+            var totalStockCheckNum = 0;
+            var totalNum = 0;
+            var stockcheckDetailsFromList = [];
+            var description = $('#stocktext').val();
+            for (var i=0;i<tr.length;i++){
+                var value = JSON.parse($(tr[i]).attr('value'))
+                TotalAmount += Number($(tr[i]).find('td:nth-child(11)').text());
+                totalProfitAndLossNum += Number($(tr[i]).find('td:nth-child(9)').text());
+                totalStockCheckNum += Number($(tr[i]).find('td:nth-child(7) input').val());
+                totalNum += Number($(tr[i]).find('td:nth-child(8)').text());
+                stockcheckDetailsFromList.push({
+                    articleId:value.articleId,
+                    profitAndLossNum:$(tr[i]).find('td:nth-child(9)').text(),
+                    stockCheckNum:$(tr[i]).find('td:nth-child(7) input').val(),
+                    num:$(tr[i]).find('td:nth-child(8)').text(),
+                    purchasingPrice:value.purchasingPrice * 100,
+                    profitAndLossAmount:$(tr[i]).find('td:nth-child(11)').text() * 100,
+                    description:$(tr[i]).find('td textarea').val()
+                })
+            }
+            var data = {
+                "profitAndLossTotalAmount":TotalAmount * 100,//盈亏总金额
+                "description":description,//描述
+                "totalProfitAndLossNum":totalProfitAndLossNum,//盈亏总数量
+                "totalStockCheckNum":totalStockCheckNum,//盘点总数量
+                "totalNum":totalNum,//盘点商品库存总数量
+                "stockcheckDetailsFromList":stockcheckDetailsFromList
+            };
+            $.post({
+                url:apiUrl + 'stock_check/stockCheckOp',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data:JSON.stringify(data),
+                success:function(res){
+                    closeThisPop(index);
+                    $('body',parent.document).find('.content iframe')[0].contentWindow.location.reload();
+                }
+            })
+        },
+        btn2:function(index){
+            closeThisPop(index);
+        },
         cancel: function(index, layero){
             closeThisPop(index);
 		}
@@ -625,9 +752,38 @@ function openuser(){
 	layer.open({
         type: 1,
         closeBtn: 1,
+        btn:['确定','取消'],
         title: ['用户管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '58.4rem', 
         content: $('#user-xz'),
+        btn1:function(index){
+            var data = {
+                "loginNo":$('.username').val(),//账号
+                "loginName":$('.userinfo').val(),//名称
+                "password":$('.password').val(),//密码
+                "status":$('.userstatus').val(),//状态：01正常 02停用
+                "roleManageNo":$('.usertype').val(),//角色权限
+                "cashier":$('#usermoney').val()//是否收银：1收银，2非收银
+            }
+            $.post({
+                url:apiUrl + 'login_info/registerLogin',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data:JSON.stringify(data),
+                success:function(res){
+                    if (res.code != 0 ){
+                        alert(res.msg)
+                    } else{
+                        closeThisPop(index);
+                        $('body',parent.document).find('.content iframe')[0].contentWindow.location.reload();
+                    }
+                }
+            })
+        },
+        btn2:function(index){
+            closeThisPop(index);
+        },
         cancel: function(index, layero){
             closeThisPop(index);
 		}
@@ -635,14 +791,40 @@ function openuser(){
 }
 
 /*用户管理 - 编辑*/
-function openuserbj(){
+function openuserbj(choose){
     var juge = sessionStorage.getItem('topText');
     layer.open({
         type: 1,
         closeBtn: 1,
+        btn:['确定','取消'],
         title: ['用户管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '58.4rem',
         content: $('#user-bj'),
+        success:function(){
+            //打开弹窗 --
+            var value = JSON.parse(choose.attr('value'));
+
+        },
+        btn1:function(index){
+            var data = {
+                "loginNo":"zhoubin123456",//账号
+                "loginName":"周斌",//名称
+                "password":"zhoubin123456",//密码
+                "status":"01",//状态：01正常 02停用
+                "roleManageNo":"001",//角色权限
+                "cashier":2//是否收银：1收银，2非收银
+            };
+            $.post({
+                url:apiUrl + 'login_info/modificationLogin',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data:JSON.stringify(data),
+            })
+        },
+        btn2:function(index){
+            closeThisPop(index);
+        },
         cancel: function(index, layero){
             closeThisPop(index);
         }

@@ -115,12 +115,13 @@
             }else if(text == '编辑'){
                 if ($('#tables .choose').length>1){
                     alert('暂时不支持多行编辑')
-                } else{
+                }else if ($('#tables .choose').length == 0){
+                    alert('请选择一行编辑')
+                }  else{
                     es.openbj($('#tables .choose'));
                     $('body',parent.document).find('.pop').show();
                 }
             } else if(text == '删除'){
-                // table.row('.choose').remove().draw( false );
                 es.opendel(table,$('#tables .choose'));
                 $('body',parent.document).find('.pop').show();
             }else{

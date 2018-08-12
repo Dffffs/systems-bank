@@ -23,6 +23,20 @@
     }
 
     //
+    function deldata(res) {
+        var data = res.data.data;
+        var body = [];
+        for (var i=0 ;i<data.length;i++){
+            body.push([
+                data[i]['stockCheckNo'],
+                data[i]['profitAndLossTotalAmount'],
+                data[i]['createtime'],
+                data[i]['loginName']
+            ])
+        }
+        return body;
+    }
+    //
     function getData() {
         $.get({
             url:apiUrl + 'stock_check/queryStockCheckOpList',
@@ -31,20 +45,12 @@
                 pageNum:9999
             },
             success:function (res) {
-                var data = res.data.data;
-                var body = [];
-                for (var i=0 ;i<data.length;i++){
-                    body.push([
-                        data[i]['stockCheckNo'],
-                        data[i]['profitAndLossTotalAmount'],
-                        data[i]['createtime'],
-                        data[i]['loginName']
-                    ])
+                if (res.data){
+                    fakeData.body = deldata(res);
+                    createTable();//创建表格
+                    choose();//layui
+                    highCancle();
                 }
-                fakeData.body = body;
-                createTable();//创建表格
-                choose();//layui
-                highCancle();
             }
         })
     }
@@ -64,7 +70,7 @@
             var value = $(this).siblings().val();
             table.search(value).draw(false);//搜索-单项
         });
-        $('.button .highsearch').click(function(){
+        $('.button .highsearch').click(function(){//切换高级搜索
             $('.cmsearch').toggle();
             $(this).toggleClass('show');
         });
@@ -74,10 +80,46 @@
             var date1 = $('#date1').val();
             var code = $('#code').val();
 
-            if (date==""&&code==""){
-                alert('请选择起止日期或输入单号查询');
-            }else{ //查询
-
+            if (code!=""||(date!=""&&date1!="")) {
+                var data = {
+                    stockinNo:code,
+                    startDate:date + ' 00:00:00',
+                    endDate:date1 + ' 00:00:00',
+                    page:0,
+                    pageNum:9999
+                };
+                if (code == ""){
+                    data = {
+                        stockinNo:code,
+                        startDate:date + ' 00:00:00',
+                        endDate:date1 + ' 00:00:00',
+                        page:0,
+                        pageNum:9999
+                    }
+                } else if(date==""||date1==""){
+                    data = {
+                        stockinNo:code,
+                        page:0,
+                        pageNum:9999
+                    }
+                }
+                $.get({
+                    url: apiUrl + 'stock_check/queryStockCheckOpList',
+                    data:data,
+                    success:function(res){
+                        if (res.data){
+                            fakeData.body = deldata(res);
+                            table.destroy();
+                            createTable();
+                        }else{
+                            fakeData.body = [];
+                            table.destroy();
+                            createTable();
+                        }
+                    }
+                });
+            }else{
+                return alert('请输入单号或者起止时间查询')
             }
         })
     };

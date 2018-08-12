@@ -72,10 +72,16 @@
                 es.openuser();
 
             }else if(text == '编辑'){
-                es.openuserbj();
+                var length = $('#tables tbody tr.choose');
+                if (length.length==0){
+                    alert('请选择一行编辑');
+                } else{
+                    length.length>1?(alert('暂不支持多行编辑')):(es.openuserbj($('#tables tbody tr.choose')));
+                }
+
             } else if(text == '删除'){
                 //table.row('.choose').remove().draw( false );
-                es.opendel(table);
+                es.opendel(table,$('#tables .choose'));
             }
         });
         $('.button .search input:button').click(function () {
