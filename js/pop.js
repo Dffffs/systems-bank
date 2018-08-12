@@ -5,6 +5,7 @@ layui.use(['layer', 'form'], function(){
 	
 });
 
+
 function closeThisPop(index){
     layer.close(index);
     $('body',parent.document).find('.pop').hide();
@@ -319,10 +320,10 @@ function openbj(choose){
         area = ['62rem', '25rem'];
     }
     if (juge == '商品类别'){
-        content = '<div class="new-box mt2">编码: <input class="new-code" disabled="disabled" value='+value+'/> </div><br /> <div class="new-box">名称:<input class="unit" value='+value1+'></div>'
+        content = '<div class="new-box mt2">编码: <input class="new-code" disabled="disabled" value='+value+'> </div><br /> <div class="new-box">名称:<input class="unit" value='+value1+'></div>'
         notInfo(juge,content,area,choose);
     }else if(juge == '商品品牌'){
-        content = '<div class="new-box mt2">编码: <input class="new-code" disabled="disabled" value='+value+'/></div><br /> <div class="new-box">名称:<input class="unit" value='+value1+'></div>'
+        content = '<div class="new-box mt2">编码: <input class="new-code" disabled="disabled" value='+value+'></div><br /> <div class="new-box">名称:<input class="unit" value='+value1+'></div>'
         notInfo(juge,content,area,choose);
     }else if(juge == '商品信息'){
         content = $('#xz-box');
@@ -344,21 +345,20 @@ function opengy(){
         area: ['42.4rem', '43.1rem'],
         content: $('#gy-pop'),
         btn1:function(index){
-            /*"supplierName":"石燕湖水街",//供货商名称
-	"contactAddress":"湖南省长沙市石燕湖景区",//供货商编号
-	"contactsName":"石燕湖",
-	"phone":"13032094388",
-	"status":"01",
-	"description":"石燕湖景区",
-	"supplierNo":"0001"*/
+            var status;
+            if ($('#buySelect').siblings().find('input').val()=="启用"){
+                status = '01';
+            }else{
+                status = '02';
+            }
             var data = {
-                supplierName:'',
-                contactAddress:'',
-                contactsName:'',
-                phone:'',
-                status:'',
-                description:'',
-                supplierNo:''
+                supplierName:$('#buyName').val(),
+                contactAddress:$('#buyAddress').val(),
+                contactsName:$('#buyPeople').val(),
+                phone:$('#buyPhone').val(),
+                status:status,
+                description:$('#buy').val(),
+                supplierNo:$('#buyName').val()
             };
             $.post({
                 url:apiUrl + 'supplier/save_supplier',
@@ -368,6 +368,7 @@ function opengy(){
                 data:JSON.stringify(data),
                 success:function(res){
                     closeThisPop(index);
+                    $('body',parent.document).find('.content iframe')[0].contentWindow.location.reload();
                 }
             });
 
@@ -444,6 +445,7 @@ function addcontent(data) {
         var tr = $(this).parent().parent();
         for (var i=0 ;i<data.length;i++){
             if(data[i]['articleBarcode'] == value){
+                tr.attr('value',JSON.stringify(data[i]))
                 tr.find('td:nth-child(4)').html('<span>'+data[i]['articleBrandName']+'</span>');
                 tr.find('td:nth-child(5)').html('<span>'+data[i]['specification']+'</span>');
                 tr.find('td:nth-child(6)').html('<span>'+data[i]['articleUnitName']+'</span>');
@@ -461,74 +463,134 @@ function addcontent(data) {
 }
 /*入库新增*/
 function openrk(){
-	layer.open({
-        type: 1,
-        closeBtn: 1,
-        btn:['确定','取消'],
-        title: ['入库-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
-        area: '89.4rem', 
-        content: $('#storage-pop'),
-        /*入库新增增加删除*/
-       	success: function(layero, index){
-       	    //查询所有货号
-       	    $.ajax({
-                url:apiUrl + 'article/queryArticleList',
-                success:function(res){
-                    var html = '<option value="">请选择</option>';
-                    for (var i=0;i<res.data.length;i++){
-                        html += '<option value="'+res.data[i].articleBarcode+'">'+res.data[i].articleBarcode+'</option>'
-                    }
-                    var tbody = $('#tab-box').find('.tab-body');
-                    tbody.find('tr:first-child select').html(html);
-                    addcontent(res.data);
-                    $('#tab-box').on('click','button.jia',function () {
-                        var indexs = $('#tab-box tbody tr').length + 1;
-                        var s = tbody.append(
-                            '<tr>'+
-                            '<td>'+(indexs)+'</td>'+
-                            '<td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>'+
-                            '<td>'+
-                            '<select class="sele" name="">'+ html+
-                            '</select>'+
-                            '</td>'+
-                            '<td></td>'+
-                            '<td></td>'+
-                            '<td></td>'+
-                            '<td><input type="number" min="0" name="" id="" value=""/></td>'+
-                            '<td><input type="number" min="0" name="" id="" value=""/></td>'+
-                            '<td><input type="number" min="0" name="" id="" value=""/></td>'+
-                            '<td></td>'+
-                            '</tr>');
+	$.get({
+        url:apiUrl + 'supplier/query_supplier',
+        success:function(res){
+            var html= '';
+            for (var i=0;i<res.data.length;i++){
+                html += '<option value="'+res.data[i]['supplierNo']+'">'+res.data[i]['supplierName']+'</option> '
+            }
+            $('#storagePeople').html(html);
+            layer.open({
+                type: 1,
+                closeBtn: 1,
+                btn:['确定','取消'],
+                title: ['入库-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+                area: '89.4rem',
+                content: $('#storage-pop'),
+                /*入库新增增加删除*/
+                success: function(layero, index){
+                    //查询所有货号
+                    $.ajax({
+                        url:apiUrl + 'article/queryArticleListPage',
+                        data:{
+                            page:0,
+                            pageNum:9999
+                        },
+                        success:function(res){
+                            var html = '<option value="">请选择</option>';
+                            for (var i=0;i<res.data.data.length;i++){
+                                html += '<option value="'+res.data.data[i].articleBarcode+'">'+res.data.data[i].articleBarcode+'</option>'
+                            }
+                            var tbody = $('#tab-box').find('.tab-body');
+                            tbody.find('tr:first-child select').html(html);
+                            addcontent(res.data.data);
+                            $('#tab-box').on('click','button.jia',function () {
+                                var indexs = $('#tab-box tbody tr').length + 1;
+                                var s = tbody.append(
+                                    '<tr>'+
+                                    '<td>'+(indexs)+'</td>'+
+                                    '<td class="bnt-box"><button type="button" class="jia"></button><button type="button" class="jian"></button></td>'+
+                                    '<td>'+
+                                    '<select class="sele" name="">'+ html+
+                                    '</select>'+
+                                    '</td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+                                    '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+                                    '<td><input type="number" min="0" name="" id="" value=""/></td>'+
+                                    '<td></td>'+
+                                    '</tr>');
+                            });
+                        }
+                    });
+                    $('#tab-box').on('click','button.jian',function () {
+                        var o=$(this).parent().parent();
+                        if(o.parent().find('tr').length === 1){
+                            alert('不能删除最后一条信息')
+                        }else{
+                            var tdlength = $(o).nextAll().find('td:first-child');
+                            for (var i=0;i<tdlength.length;i++){
+                                $(tdlength[i]).text($(tdlength[i]).text()-1)
+                            }
+                            o.remove();
+                        }
+
 
                     });
+
+                },
+                btn1:function(index){
+                    var amount = $('#tab-box tbody tr td:last-child');
+                    var totalNum = $('#tab-box tbody tr td:nth-child(7)');
+                    var trAll = $('#tab-box tbody tr');
+                    var all = 0;
+                    var allNumber = 0;
+                    var arr = [];
+                    for (var i=0;i<amount.length;i++){
+                        all += Number($(amount[i]).text())
+                    }
+                    for (var s=0;s<totalNum.length;s++){
+                        allNumber += Number($(totalNum[s]).text())
+                    }
+                    for (var e=0;e<trAll.length;e++){
+                        if ($(trAll[e]).attr('value').length>1){
+                            var value = JSON.parse($(trAll[e]).attr('value'));
+                            var num = $(trAll[e]).find('td:nth-child(7) input').val();
+                            var sellingPrice = $(trAll[e]).find('td:nth-child(9) input').val();
+                            var purchasingPrice = $(trAll[e]).find('td:nth-child(8) input').val();
+                            var amount = $(trAll[e]).find('td:nth-child(10) input').val();
+                            arr.push({
+                                "articleId":value.articleId,// 商品id
+                                "num":num, //入库数量,
+                                "sellingPrice":sellingPrice * 100,//售价 (单位是“分”)
+                                "purchasingPrice":purchasingPrice,//进价(单位是“分”)
+                                "amount":amount * 100//进价总金额(单位是“分”)
+                            });
+                        }
+
+                    }
+                    var data = {
+                        stockindate:new Date().pattern('yyyy-MM-dd hh:mm:ss'),
+                        supplierNo:$('#storagePeople').val(),
+                        amount:all * 100,
+                        totalNum:allNumber,
+                        stockInDetailsFromList:arr,
+                    };
+                    $.post({
+                        url:apiUrl + 'stockin/inventory_storage',
+                        headers: {
+                            'Content-Type': 'application/json;charset=UTF-8'
+                        },
+                        data:JSON.stringify(data),
+                        success:function(res){
+                            console.log(res)
+                            closeThisPop(index);
+                        }
+                    });
+
+                },
+                btn2:function(index){
+                    closeThisPop(index);
+                },
+                cancel: function(index, layero){
+                    closeThisPop(index);
                 }
             });
-		    $('#tab-box').on('click','button.jian',function () {
-                var o=$(this).parent().parent();
-		        if(o.parent().find('tr').length === 1){
-		            alert('不能删除最后一条信息')
-                }else{
-                    var tdlength = $(o).nextAll().find('td:first-child');
-                    for (var i=0;i<tdlength.length;i++){
-                        $(tdlength[i]).text($(tdlength[i]).text()-1)
-                    }
-                    o.remove();
-                }
-
-
-		    });
-
-		},
-        btn1:function(index){
-            closeThisPop(index);
-        },
-		btn2:function(index){
-            closeThisPop(index);
-        },
-        cancel: function(index, layero){
-            closeThisPop(index);
-		}
-    });
+        }
+    })
 	
 }
 //库存管理新增

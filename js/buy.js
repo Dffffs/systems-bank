@@ -21,9 +21,21 @@
         }
         $.ajax({
             url:url,
+            data:{
+                page:0,
+                pageNum:9999
+            },
             success:function (res) {
-                fakeData.body = delData(res.data)
-                createTable();//创建表格
+                if (res.data){
+                    if (fakeData.topText == '供货商'){
+                        fakeData.body = delData(res.data)
+                    }else{
+                        fakeData.body = delData(res.data.data)
+                    }
+
+                    createTable();//创建表格
+                }
+
             }
         })
     }
@@ -77,7 +89,6 @@
         var html,html1,want;
         if (fakeData.topText!="入库"){
             want = true;
-
         }
         html1 = buildTbody(fakeData.body,want);
         html = buildThead(fakeData.head,want);
@@ -126,14 +137,52 @@
             var date = $('#date').val();
             var date1 = $('#date1').val();
             var code = $('#code').val();
-            
+
             //用时间段或者code搜索
-            if (date==""||code=="") {
-                alert('请选择起止日期或输入单号查询')
+
+            if (code!=""||(date!=""&&date1!="")) {
+                var data = {
+                    stockinNo:code,
+                    startDate:date + ' 00:00:00',
+                    endDate:date1 + ' 00:00:00',
+                    page:0,
+                    pageNum:9999
+                };
+                if (code == ""){
+                    data = {
+                        stockinNo:code,
+                        startDate:date + ' 00:00:00',
+                        endDate:date1 + ' 00:00:00',
+                        page:0,
+                        pageNum:9999
+                    }
+                } else if(date==""||date1==""){
+                    data = {
+                        stockinNo:code,
+                        page:0,
+                        pageNum:9999
+                    }
+                }
+                $.get({
+                    url: apiUrl + 'stockin/queryStockInList',
+                    data:data,
+                    success:function(res){
+                        if (res.data){
+
+                            if (fakeData.topText == '供货商'){
+                                fakeData.body = delData(res.data)
+                            }else{
+                                fakeData.body = delData(res.data.data)
+                            }
+                            table.destroy();
+                            createTable();
+                        }
+
+                    }
+                });
             }else{
-
+                return alert('请输入单号或者起止时间查询')
             }
-
         })
     };
 

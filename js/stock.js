@@ -5,10 +5,8 @@
         body:[]
     };
     $(document).ready(function(){
-        createTable();//创建表格
+        getData();
 
-        choose();//layui
-        highCancle();
     });
 
 
@@ -21,9 +19,35 @@
         var option = options();
         var table = $('#tables').DataTable(option);
         leftButtonClick(table);//按钮点击事件
-        allCheck()//全选
+
     }
 
+    //
+    function getData() {
+        $.get({
+            url:apiUrl + 'stock_check/queryStockCheckOpList',
+            data:{
+                page:0,
+                pageNum:9999
+            },
+            success:function (res) {
+                var data = res.data.data;
+                var body = [];
+                for (var i=0 ;i<data.length;i++){
+                    body.push([
+                        data[i]['stockCheckNo'],
+                        data[i]['profitAndLossTotalAmount'],
+                        data[i]['createtime'],
+                        data[i]['loginName']
+                    ])
+                }
+                fakeData.body = body;
+                createTable();//创建表格
+                choose();//layui
+                highCancle();
+            }
+        })
+    }
     //新增-编辑-删除-复选框-搜索
     function leftButtonClick(table) {
         $('#tables').on('click','input:checkbox',function () {
