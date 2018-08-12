@@ -24,8 +24,17 @@
         $.ajax({
             type:'GET',
             url:url,
+            data:{
+                page:0,
+                pageNum:9999
+            },
             success:function(res){
-                fakeData.body = fixedData(res.data);
+                if (res.data.data){
+                    fakeData.body = fixedData(res.data.data);
+                }else{
+                    fakeData.body = fixedData(res.data)
+                }
+
                 console.log(res)
                 createTable();
             }
