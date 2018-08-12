@@ -103,13 +103,15 @@
 
     //新增-编辑-删除-复选框-搜索
     function leftButtonClick(table) {
-        $('#tables').on('click','input:checkbox',function () {
+        $('#tables').unbind('click').on('click','input:checkbox',function () {
             $(this).parent().parent().toggleClass('choose');
         });
-        $('.button .add,.button .del').click(function () {//新增-编辑-删除
+        $('.button .add,.button .del').unbind('click').click(function () {//新增-编辑-删除
             var text = $(this).find('span').text();
+            sessionStorage.setItem('poptext',text);
             var e = $('body',parent.document).find('.pop iframe')[0].contentWindow;
             $('body',parent.document).find('.pop').show();
+
             if (text == '新增'){
                 if (fakeData.topText=="供货商"){
                     e.opengy(table);
@@ -123,17 +125,17 @@
 
             }
         });
-        $('.button .search input:button').click(function () {
+        $('.button .search input:button').unbind('click').click(function () {
             var value = $(this).siblings().val();
                 table.search(value).draw(false);//搜索-单项
 
         });
-        $('.button .highsearch').click(function(){//隐藏
+        $('.button .highsearch').unbind('click').click(function(){//隐藏
             $('.cmsearch').toggle();
             $(this).toggleClass('show');
         });
         //高级搜索确定按钮
-        $('.cmsearch .confirm').click(function () {
+        $('.cmsearch .confirm').unbind('click').click(function () {
             var date = $('#date').val();
             var date1 = $('#date1').val();
             var code = $('#code').val();

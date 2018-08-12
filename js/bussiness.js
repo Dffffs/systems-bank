@@ -36,20 +36,20 @@
             $('.cmsearch').toggle();//高级搜索选项
             $(this).toggleClass('show');
         });
-        $('.tab span').unbind('click').click(function () {//切换
-            if (!$(this).hasClass('active')) {
-                $(this).addClass('active');
-                $(this).siblings().removeClass('active');
-                if ($(this).text()=='交易流水'){
-                    fakeData.head = JSON.parse(sessionStorage.getItem('head'))[0];
-                }else{
-                    fakeData.head = JSON.parse(sessionStorage.getItem('head'))[1];
-                };
-                table.destroy();
-                init();
-            }
-        })
-        $('.cmsearch .confirm').click(function () {//高级搜索确定按钮
+        // $('.tab span').unbind('click').click(function () {//切换
+        //     if (!$(this).hasClass('active')) {
+        //         $(this).addClass('active');
+        //         $(this).siblings().removeClass('active');
+        //         if ($(this).text()=='交易流水'){
+        //             fakeData.head = JSON.parse(sessionStorage.getItem('head'))[0];
+        //         }else{
+        //             fakeData.head = JSON.parse(sessionStorage.getItem('head'))[1];
+        //         };
+        //         table.destroy();
+        //         init();
+        //     }
+        // });
+        $('.cmsearch .confirm').unbind('click').click(function () {//高级搜索确定按钮
             var date = $('#date').val();//时间
             var date1 = $('#date1').val();
             var select = $('.cmsearch div:first-child ul:first-child input:checked').val();//时间

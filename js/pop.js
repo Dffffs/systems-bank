@@ -89,6 +89,7 @@ function selectContent(result) {
 //基础数据新增弹窗 -
 function openit(table){
     var juge = sessionStorage.getItem('topText');
+    var text = sessionStorage.getItem('poptext');
     var content;
     var area = ['60rem', '25rem'];
     if (juge == '商品类别'){
@@ -106,7 +107,7 @@ function openit(table){
         type: 1,
         closeBtn: 1,
         btn:['保存并新增'],
-        title: ['商品信息-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        title: [juge +'-'+ text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: area,
         content: content,
         yes:function(index){
@@ -185,6 +186,8 @@ function openxg(){
    
 }
 function getSome(code,content,area,choose){
+    var text = sessionStorage.getItem('poptext');
+    var juge = sessionStorage.getItem('topText');
     $.ajax({
         type:'GET',
         url:apiUrl + 'article/query_Article',
@@ -204,7 +207,7 @@ function getSome(code,content,area,choose){
                 type: 1,
                 closeBtn: 1,
                 btn:['确定','取消'],
-                title: ['商品信息-编辑', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+                title: [juge +'-' + text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
                 area: area,
                 content: content,
                 yes:function(index){
@@ -249,11 +252,13 @@ function getSome(code,content,area,choose){
     })
 }
 function notInfo(juge,content,area,choose){
+    var text = sessionStorage.getItem('poptext');
+    var juge = sessionStorage.getItem('topText');
     layer.open({
         type: 1,
         closeBtn: 1,
         btn:['确定','取消'],
-        title: ['商品信息-编辑', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        title: [juge+'-'+text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: area,
         content: content,
         yes:function(index){
@@ -337,11 +342,12 @@ function openbj(choose){
 
 }
 function opengy(){
+    var text = sessionStorage.getItem('poptext');
 	layer.open({
         type: 1,
         closeBtn: 1,
         btn:['确定','取消'],
-        title: ['供货商-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        title: ['供货商-'+text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: ['42.4rem', '43.1rem'],
         content: $('#gy-pop'),
         btn1:function(index){
@@ -383,11 +389,13 @@ function opengy(){
 }
 //删除条目弹窗
 function opendel(table,row){
+    var text = sessionStorage.getItem('poptext');
+    var juge = sessionStorage.getItem('topText');
 	layer.open({
         type: 1,
         closeBtn: 1,
         btn:['确定','取消'],
-        title: ['商品类别-删除', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        title: [juge+ '-' + text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: ['62.3rem', '20rem'],
         content: $('#del-pop'),
         yes:function(index){
@@ -486,6 +494,8 @@ function addcontent(select,data) {
 }
 /*入库新增*/
 function openrk(){
+    var text = sessionStorage.getItem('poptext');
+    var juge = sessionStorage.getItem('topText');
 	$.get({
         url:apiUrl + 'supplier/query_supplier',
         success:function(res){
@@ -498,7 +508,7 @@ function openrk(){
                 type: 1,
                 closeBtn: 1,
                 btn:['确定','取消'],
-                title: ['入库-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+                title: [juge+'-' + text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
                 area: '89.4rem',
                 content: $('#storage-pop'),
                 /*入库新增增加删除*/
@@ -618,11 +628,13 @@ function openrk(){
 }
 //库存管理新增
 function openkc(){
+    var text = sessionStorage.getItem('poptext');
+    var juge = sessionStorage.getItem('topText');
 	layer.open({
         type: 1,
         closeBtn: 1,
         btn:['确认','取消'],
-        title: ['库存管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        title: [juge+ '-' + text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '89.4rem', 
         content: $('#stock-pop'),
         success:function(index){
@@ -746,16 +758,40 @@ function openTips(){
 		}
     });
 }
+function allset(fn) {
+    $.ajax({
+        url:apiUrl + 'role_manage_info/queryRoleManageInfo',
+        success:function(res){
+            var data = res.data;
+            var html = '<option></option>';
+            for (var i=0;i<data.length;i++){
+                html += '<option value="'+data[i]['roleManageNo']+'">'+data[i]['roleManageName']+'</option>'
+            }
+            $('.usertype').html(html);
+            fn&&(fn())
+        }
+    });
+}
 /*用户管理-新增*/
 function openuser(){
+    var text = sessionStorage.getItem('poptext');
     var juge = sessionStorage.getItem('topText');
 	layer.open({
         type: 1,
         closeBtn: 1,
         btn:['确定','取消'],
-        title: ['用户管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        title: [juge +'-' + text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '58.4rem', 
         content: $('#user-xz'),
+        success:function(){
+            allset();
+
+            $('.username').removeAttr('disabled').val('');
+            $('.userinfo').val('');
+            $('.password').val('');
+            $('.userstatus').val('');
+            $('#usermoney').val('');
+        },
         btn1:function(index){
             var data = {
                 "loginNo":$('.username').val(),//账号
@@ -764,7 +800,7 @@ function openuser(){
                 "status":$('.userstatus').val(),//状态：01正常 02停用
                 "roleManageNo":$('.usertype').val(),//角色权限
                 "cashier":$('#usermoney').val()//是否收银：1收银，2非收银
-            }
+            };
             $.post({
                 url:apiUrl + 'login_info/registerLogin',
                 headers: {
@@ -791,28 +827,44 @@ function openuser(){
 }
 
 /*用户管理 - 编辑*/
-function openuserbj(choose){
+function openuserbj(tbody){
+    var text = sessionStorage.getItem('poptext');
     var juge = sessionStorage.getItem('topText');
     layer.open({
         type: 1,
         closeBtn: 1,
         btn:['确定','取消'],
-        title: ['用户管理-新增', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        title: [juge+'-' + text, 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
         area: '58.4rem',
-        content: $('#user-bj'),
+        content: $('#user-xz'),
         success:function(){
+            allset(function () {
+                $.ajax({
+                    url:apiUrl + 'login_info/queryLoginList',
+                    success:function(res){
+                        var index = tbody.find('tr.choose').index();
+                        var data = res.data[index];
+                        $('.username').attr('disabled','disabled');
+                        $('.username').val(data['loginNo']);
+                        $('.userinfo').val(data['loginName'])
+                        $('#usermoney').val(data['cashier'])
+                        $('.password').val(data['password'])
+                        $('.usertype').val(data['roleManageNo'])
+                        $('.userstatus').val(data['status'])
+                    }
+                })
+            });
             //打开弹窗 --
-            var value = JSON.parse(choose.attr('value'));
 
         },
         btn1:function(index){
             var data = {
-                "loginNo":"zhoubin123456",//账号
-                "loginName":"周斌",//名称
-                "password":"zhoubin123456",//密码
-                "status":"01",//状态：01正常 02停用
-                "roleManageNo":"001",//角色权限
-                "cashier":2//是否收银：1收银，2非收银
+                "loginNo":$('.username').val(),//账号
+                "loginName":$('.userinfo').val(),//名称
+                "password":$('.password').val(),//密码
+                "status":$('.userstatus').val(),//状态：01正常 02停用
+                "roleManageNo":$('.usertype').val(),//角色权限
+                "cashier":$('#usermoney').val()//是否收银：1收银，2非收银
             };
             $.post({
                 url:apiUrl + 'login_info/modificationLogin',
@@ -820,6 +872,10 @@ function openuserbj(choose){
                     'Content-Type': 'application/json;charset=UTF-8'
                 },
                 data:JSON.stringify(data),
+                success:function (res) {
+                    closeThisPop(index);
+                    $('body',parent.document).find('.content iframe')[0].contentWindow.location.reload();
+                }
             })
         },
         btn2:function(index){

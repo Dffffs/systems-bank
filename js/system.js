@@ -5,6 +5,7 @@
         body:[]
     };
     $(document).ready(function () {
+        getData();
         create();
     });
 
@@ -19,35 +20,29 @@
         }else{
 
         }
-        createTable()
     }
     
     //请求数据
     function getData() {
-        var url = apiUrl;
-        if (fakeData.topText == '商品类别'){
-            url += 'article_type/query_article_type'
-        } else if(fakeData.topText == '商品品牌'){
-            url += 'article_brand/query_article_brand'
-        }else if(fakeData.topText == '商品信息'){
-            url += 'article/queryArticleList'
-        }else{
-            url += 'article_unit/query_article_unit'
-        }
         $.ajax({
-            type:'GET',
-            url:url,
+            url:apiUrl + 'login_info/queryLoginList',
             success:function(res){
-                fakeData.body = fixedData(res.data);
-                console.log(res)
-                createTable();
+                var body = [];
+                var data = res.data;
+                for (var i=0;i<data.length;i++){
+                    body.push([
+                        data[i].loginNo,
+                        data[i].loginName,
+                        data[i].statusName,
+                        data[i].roleManageName,
+                        data[i].cashierName
+                    ])
+                }
+                fakeData.body = body;
+                createTable()
             }
-        });
+        })
     };
-    //处理返回数据
-    function fixedData(data) {
-
-    }
     //创建表格
     function createTable() {
         var html,html1;
@@ -61,14 +56,15 @@
 
     //新增-编辑-删除-复选框-搜索
     function leftButtonClick(table) {
-        $('#tables').on('click','input:checkbox',function () {
+        $('#tables').unbind('click').on('click','input:checkbox',function () {
             $(this).parent().parent().toggleClass('choose');
         });
-        $('.button .add,.button .change,.button .del').click(function () {
+        $('.button .add,.button .change,.button .del').unbind('click').click(function () {
             var es = $('body',parent.document).find('.pop iframe')[0].contentWindow;
             var text = $(this).find('span').text();
-            $('body',parent.document).find('.pop').show();
+            sessionStorage.setItem('poptext',text);
             if (text == '新增'){
+                $('body',parent.document).find('.pop').show();
                 es.openuser();
 
             }else if(text == '编辑'){
@@ -76,27 +72,34 @@
                 if (length.length==0){
                     alert('请选择一行编辑');
                 } else{
-                    length.length>1?(alert('暂不支持多行编辑')):(es.openuserbj($('#tables tbody tr.choose')));
+                    if (length.length>1){
+                        alert('暂不支持多行编辑')
+                    } else{
+                        $('body',parent.document).find('.pop').show();
+                        es.openuserbj($('#tables tbody'))
+                    }
                 }
 
             } else if(text == '删除'){
                 //table.row('.choose').remove().draw( false );
+                $('body',parent.document).find('.pop').show();
                 es.opendel(table,$('#tables .choose'));
+
             }
         });
-        $('.button .search input:button').click(function () {
+        $('.button .search input:button').unbind('click').click(function () {
             var value = $(this).siblings().val();
             table.search(value).draw(false);//搜索-单项
 
         });
-        $('.id p').click(function () {//切换角色
+        $('.id p').unbind('click').click(function () {//切换角色
             if (!$(this).hasClass('active')) {
                 $(this).addClass('active');
                 $(this).siblings().removeClass('active');
             }
         });
 
-        $('.password div:last-child input').click(function () { //修改密码
+        $('.password div:last-child input').unbind('click').click(function () { //修改密码
             var oldWord = $(this).parent().siblings().find('input:text').val();
             var newword = $($(this).parent().parent().find('input:password')[0]).val();
             var confirmnewword = $($(this).parent().parent().find('input:password')[1]).val();

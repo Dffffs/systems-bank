@@ -102,33 +102,35 @@
 
     //新增-编辑-删除-复选框-搜索
     function leftButtonClick(table) {
-        $('#tables').on('click','input:checkbox',function () {
+        $('#tables').unbind('click').on('click','input:checkbox',function () {
             $(this).parent().parent().toggleClass('choose');
         });
-        $('.button .add,.button .change,.button .del').click(function () {
+        $('.button .add,.button .change,.button .del').unbind('click').click(function () {
             var text = $(this).find('span').text();
             var es = $('body',parent.document).find('.pop iframe')[0].contentWindow;
-
+            sessionStorage.setItem('poptext',text);
             if (text == '新增'){
-                es.openit(table);
                 $('body',parent.document).find('.pop').show();
+                es.openit(table);
             }else if(text == '编辑'){
                 if ($('#tables .choose').length>1){
                     alert('暂时不支持多行编辑')
                 }else if ($('#tables .choose').length == 0){
                     alert('请选择一行编辑')
                 }  else{
-                    es.openbj($('#tables .choose'));
                     $('body',parent.document).find('.pop').show();
+                    es.openbj($('#tables .choose'));
+
                 }
             } else if(text == '删除'){
-                es.opendel(table,$('#tables .choose'));
                 $('body',parent.document).find('.pop').show();
+                es.opendel(table,$('#tables .choose'));
+
             }else{
 
             }
         });
-        $('.button .search input:button').click(function () {
+        $('.button .search input:button').unbind('click').click(function () {
 
             var value = $(this).siblings().val();
             var select = $('.search select').val();

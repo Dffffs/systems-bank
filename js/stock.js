@@ -56,33 +56,34 @@
     }
     //新增-编辑-删除-复选框-搜索
     function leftButtonClick(table) {
-        $('#tables').on('click','input:checkbox',function () {
+        $('#tables').unbind('click').on('click','input:checkbox',function () {
             $(this).parent().parent().toggleClass('choose');
         });
-        $('.button .add').click(function () {//新增
+        $('.button .add').unbind('click').click(function () {//新增
             var text = $(this).find('span').text();
+            sessionStorage.setItem('poptext',text);
             var es = $('body',parent.document).find('.pop iframe')[0].contentWindow;
             $('body',parent.document).find('.pop').show();
             es.openkc(table);
 
         });
-        $('.button .search input:button').click(function () {
+        $('.button .search input:button').unbind('click').click(function () {
             var value = $(this).siblings().val();
             table.search(value).draw(false);//搜索-单项
         });
-        $('.button .highsearch').click(function(){//切换高级搜索
+        $('.button .highsearch').unbind('click').click(function(){//切换高级搜索
             $('.cmsearch').toggle();
             $(this).toggleClass('show');
         });
         //高级搜索
-        $('.cmsearch .confirm').click(function () {
+        $('.cmsearch .confirm').unbind('click').click(function () {
             var date = $('#date').val();
             var date1 = $('#date1').val();
             var code = $('#code').val();
 
             if (code!=""||(date!=""&&date1!="")) {
                 var data = {
-                    stockinNo:code,
+                    stockCheckNo:code,
                     startDate:date + ' 00:00:00',
                     endDate:date1 + ' 00:00:00',
                     page:0,
@@ -90,7 +91,7 @@
                 };
                 if (code == ""){
                     data = {
-                        stockinNo:code,
+                        stockCheckNo:code,
                         startDate:date + ' 00:00:00',
                         endDate:date1 + ' 00:00:00',
                         page:0,
@@ -98,7 +99,7 @@
                     }
                 } else if(date==""||date1==""){
                     data = {
-                        stockinNo:code,
+                        stockCheckNo:code,
                         page:0,
                         pageNum:9999
                     }
