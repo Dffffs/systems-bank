@@ -88,7 +88,10 @@ function choose() {
             min:-90,
             max:0,
             done:function (value,date,enddate) {
-                console.log(value,date,enddate)
+                var radio = $('.cmsearch div:first-child ul:first-child input[type="radio"]');
+                for (var i=0;i<radio.length;i++){
+                    $(radio[i]).attr('disabled','disabled');
+                }
                 var min = date.year + '-' + date.month + '-' +date.date
                 laydate.render({
                     elem: '#date1',

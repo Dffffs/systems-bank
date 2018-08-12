@@ -21,6 +21,7 @@
         $('#tables').html(html+html1);
         var option = options();
         var table = $('#tables').DataTable(option);
+        $('.dataTables_empty').text('请搜索');
         leftButtonClick(table);//按钮点击事件
         allCheck()//全选
     }
@@ -49,29 +50,60 @@
         //         init();
         //     }
         // });
+        $('.cmsearch div:first-child ul:first-child input[type="radio"]').change(function () {
+            if (!$('#date').val('').attr('disabled')){
+                if (this.checked){
+                    $('#date').val('').attr('disabled','true');
+                    $('#date1').val('').attr('disabled','true');
+                }
+            }
+        });
         $('.cmsearch .confirm').unbind('click').click(function () {//高级搜索确定按钮
             var date = $('#date').val();//时间
             var date1 = $('#date1').val();
+            var checked = $('.cmsearch div:first-child ul:first-child input[type="radio"]:checked');
+
             var select = $('.cmsearch div:first-child ul:first-child input:checked').val();//时间
             var code = $('#code').val();//流水号
-            var people = $('#people').val();//收银
             var status = $('.cmsearch div:first-child ul:last-child input:checked').val();//状态
             var barcode = $('#barcode').val();//订单号
-
-            switch (select){
-                case "1":select = '今天';break;
-                case "2":select = '昨天';break;
-                case "3":select = '本周';break;
-                case "4":select = '上周';break;
-                case "5":select = '本月';break;
-            }
-
             switch (status){
-                case "1":status = '全部';break;
-                case "2":status = '成功';break;
-                case "3":status = '失败';break;
-                case "4":status = '处理中';break;
+                case "1":status = '00,03,06,09';break;
+                case "2":status = '00';break;
+                case "3":status = '03';break;
+                case "4":status = '06';break;
             }
+            //用时间段或者code搜索
+
+            if ((checked.length>0)||(date!=""&&date1!="")) {
+                var data = {
+                    serialNo:code,
+                    transStatus:status,
+                    orderNo:barcode,
+                    page:0,
+                    pageNum:99999
+                };
+                if (date!=""){
+                    data.startDate = date
+                    data.endDate = date1
+                } else{
+                    data.dateType = select
+                }
+
+                $.ajax({
+                    url:apiUrl + 'order_transaction/query_order_trans_info',
+                    data:data,
+                    success:function(res){
+                        console.log(res)
+
+                    }
+                });
+
+            }else{
+                return alert('请选择时间')
+            }
+
+
         });
     };
 })();
