@@ -14,20 +14,20 @@
             </div>
             <div class="content"></div>
         </div>
-        <div class="cop money">
-            <div class="top">
-                <img src="../img/index/钱@2x.png" alt="">
-                <span>毛利</span>
-            </div>
-            <div class="content"></div>
-        </div>
-        <div class="cop repon">
-            <div class="top">
-                <img src="../img/index/库存详情@2x.png" alt="">
-                <span>库存</span>
-            </div>
-            <div class="content"></div>
-        </div>
+        <!--<div class="cop money">-->
+            <!--<div class="top">-->
+                <!--<img src="../img/index/钱@2x.png" alt="">-->
+                <!--<span>毛利</span>-->
+            <!--</div>-->
+            <!--<div class="content"></div>-->
+        <!--</div>-->
+        <!--<div class="cop repon">-->
+            <!--<div class="top">-->
+                <!--<img src="../img/index/库存详情@2x.png" alt="">-->
+                <!--<span>库存</span>-->
+            <!--</div>-->
+            <!--<div class="content"></div>-->
+        <!--</div>-->
         <div class="cop inrepon">
             <div class="top">
                 <img src="../img/index/调拨入库@2x.png" alt="">
@@ -48,22 +48,27 @@
             })
 
             function dealContent(){
+                // $.ajax({
+                //     success:function (res) {
+                //
+                //     }
+                // });
                 $('#contain .sale .content').html(//销售
                     '<p>今天:  <span class="large">1</span>元</p>' +
                     '<p class="small">昨天:  <span class="now">3</span>元</p>' +
                     '<p>本周:  2元</p>' +
                     '<p>本月:  2元</p>'
                 );
-                $('#contain .money .content').html(//毛利
-                    '<p>今天:  <span class="large">2</span>元</p>' +
-                    '<p class="small">昨天:  <span class="now">3</span>元</p>' +
-                    '<p>本周:  3元</p>' +
-                    '<p>本月:  3元</p>'
-                );
-                $('#contain .repon .content').html(//库存
-                    '<p>库存金额:</p>' +
-                    '<p><span class="large">2</span>元</p>'
-                );
+                // $('#contain .money .content').html(//毛利
+                //     '<p>今天:  <span class="large">2</span>元</p>' +
+                //     '<p class="small">昨天:  <span class="now">3</span>元</p>' +
+                //     '<p>本周:  3元</p>' +
+                //     '<p>本月:  3元</p>'
+                // );
+                // $('#contain .repon .content').html(//库存
+                //     '<p>库存金额:</p>' +
+                //     '<p><span class="large">2</span>元</p>'
+                // );
                 $('#contain .inrepon .content').html(//入库
                     '<p>本周:  <span class="large">2</span>元</p>'+
                     '<p>本月:  2元</p>'+

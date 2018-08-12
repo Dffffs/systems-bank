@@ -77,12 +77,18 @@
 
             if ((checked.length>0)||(date!=""&&date1!="")) {
                 var data = {
-                    serialNo:code,
-                    transStatus:status,
-                    orderNo:barcode,
                     page:0,
                     pageNum:99999
                 };
+                if (code!=''){
+                    data.serialNo = code
+                }
+                if (status!=''){
+                    data.transStatus = status
+                }
+                if (barcode != ''){
+                    data.orderNo = barcode
+                }
                 if (date!=""){
                     data.startDate = date
                     data.endDate = date1
@@ -94,8 +100,24 @@
                     url:apiUrl + 'order_transaction/query_order_trans_info',
                     data:data,
                     success:function(res){
-                        console.log(res)
-
+                        var body = [];
+                        if (res.data){
+                            var data = res.data.data.orderTransactionLogVoList;
+                            for (var i=0;i<data.length;i++){
+                                body.push([
+                                    data[i]['transNo'],
+                                    data[i]['serialNo'],
+                                    data[i]['transDate'],
+                                    data[i]['orderno'],
+                                    data[i]['operatorName'],
+                                    data[i]['amount'],
+                                    data[i]['transStatus']
+                                ]);
+                            }
+                        }
+                        fakeData.body = body;
+                        table.destroy();
+                        init();
                     }
                 });
 

@@ -4,8 +4,8 @@
 }
 
 #contain .cop{
-    width: 27rem;
-    height: 15rem;
+    width: 40%;
+    height: 25rem;
     border-radius: 1rem;
     background-color: #ffffff;
     float: left;
@@ -28,7 +28,7 @@
 }
 #contain .cop .content{
     box-sizing: border-box;
-    padding: .5rem 2rem;
+    padding: 3.5rem 2rem;
     color: #555555;
 }
 #contain .cop .content p{
@@ -48,7 +48,7 @@
     margin-top: 2rem;
 }
 #contain .cop.inrepon .content p:first-child{
-    margin: 2rem 0;
+    margin: 1rem 0 2rem 0;
 }
 #contain .bottom{
     text-align: center;

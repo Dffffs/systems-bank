@@ -102,7 +102,9 @@
         selected(select);//生成左侧点击栏
         Allbind();
     });
+    
 
+    
     //生成左侧点击栏
     function selected(select) {
         var html = '';
