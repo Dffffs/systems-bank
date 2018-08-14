@@ -513,6 +513,7 @@ function openrk(){
                 content: $('#storage-pop'),
                 /*入库新增增加删除*/
                 success: function(layero, index){
+                    codes($('#storage-pop'));
                     //查询所有货号
                     $.ajax({
                         url:apiUrl + 'article/queryArticleListPage',
@@ -528,6 +529,7 @@ function openrk(){
                             var tbody = $('#tab-box').find('.tab-body');
                             tbody.find('tr:first-child select').html(html);
                             addcontent($('#tab-box .tab-body'),res.data.data);
+                            $('#tab-box').off('click');
                             $('#tab-box').on('click','button.jia',function () {
                                 var indexs = $('#tab-box tbody tr').length + 1;
                                 var s = tbody.append(
@@ -547,22 +549,10 @@ function openrk(){
                                     '<td></td>'+
                                     '</tr>');
                             });
+                            bindjian($('#tab-box'))
                         }
                     });
-                    $('#tab-box').on('click','button.jian',function () {
-                        var o=$(this).parent().parent();
-                        if(o.parent().find('tr').length === 1){
-                            alert('不能删除最后一条信息')
-                        }else{
-                            var tdlength = $(o).nextAll().find('td:first-child');
-                            for (var i=0;i<tdlength.length;i++){
-                                $(tdlength[i]).text($(tdlength[i]).text()-1)
-                            }
-                            o.remove();
-                        }
 
-
-                    });
 
                 },
                 btn1:function(index){
@@ -626,6 +616,20 @@ function openrk(){
     })
 	
 }
+function bindjian(select) {
+    select.on('click','button.jian',function () {
+        var o=$(this).parent().parent();
+        if(o.parent().find('tr').length === 1){
+            alert('不能删除最后一条信息')
+        }else{
+            var tdlength = $(o).nextAll().find('td:first-child');
+            for (var i=0;i<tdlength.length;i++){
+                $(tdlength[i]).text($(tdlength[i]).text()-1)
+            }
+            o.remove();
+        }
+    });
+}
 //库存管理新增
 function openkc(){
     var text = sessionStorage.getItem('poptext');
@@ -646,6 +650,7 @@ function openkc(){
                 },
                 success:function(res){
                     if (res.data){
+                        codes($('#stock-pop'));
                         var html = '<option value="">请选择</option>';
                         for (var i=0;i<res.data.data.length;i++){
                             if (res.data.data[i]['stockNum'] != null){
@@ -655,6 +660,7 @@ function openkc(){
                         var tbody = $('#stock-pop tbody');
                         tbody.find('tr:first-child select').html(html);
                         addcontent(tbody,res.data.data);
+                        $('#stock-pop').off('click');
                         $('#stock-pop').on('click','button.jia',function () {
                             var indexs = $('#stock-pop tbody tr').length + 1;
                             var s = tbody.append(
@@ -676,18 +682,7 @@ function openkc(){
                                 '<td><textarea class="stockarea"></textarea></td>'+
                                 '</tr>');
                         });
-                        $('#stock-pop').on('click','button.jian',function () {
-                            var o=$(this).parent().parent();
-                            if(o.parent().find('tr').length === 1){
-                                alert('不能删除最后一条信息')
-                            }else{
-                                var tdlength = $(o).nextAll().find('td:first-child');
-                                for (var i=0;i<tdlength.length;i++){
-                                    $(tdlength[i]).text($(tdlength[i]).text()-1)
-                                }
-                                o.remove();
-                            }
-                        });
+                        bindjian($('#stock-pop'))
                     }////////////////
                 }
             });
@@ -900,4 +895,38 @@ function opendetails(){
             closeThisPop(index);
         }
     });
+}
+
+function codes(select) {
+    $('.code').unbind('click').click(function () {
+        codeview(select);
+    })
+}
+
+function codeview(select){
+    layer.open({
+        type: 1,
+        closeBtn: 1,
+        btn:['确认'],
+        title: ['扫码', 'font-size:1rem;color:#a6b5da;background-color: #3e4052;height: 3rem;line-height: 3rem;'],
+        area: ['60rem', '15rem'],
+        content: $('#codeview'),
+        success:function(){
+            $('#codeview input').focus();
+        },
+        btn1:function(index){
+            var code = $('#codeview input').val();
+            if (code == ''){
+                alert('请扫码')
+            } else{
+                var s = select.find('table tr:first-child .jia').trigger('click');
+                console.log(s)
+            }
+
+            layer.close(index);
+        },
+        cancel: function(index, layero){
+            layer.close(index);
+        }
+    })
 }
