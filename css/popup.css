@@ -18,17 +18,17 @@ img[src=""],img:not([src]){opacity:0;}
 .info-tit:after{content: '';position: absolute;left: 0;top:0;bottom: 0;margin: auto;width: 4px;height: 100%;border-radius:4px;background-color: #808dff;}
 .flex-block{display: flex;flex-wrap:wrap;margin: 0 50px;}
 .flex-block .inpt-inline{width: 33.33%;margin-bottom: 10px;}
-.flex-block .inpt-inline label{float: left; width: calc(100% - 21rem);text-align: right;margin-right: 1rem;font-size: 16px;line-height: 42px; display: inline-block;color: #333333;}
+.flex-block .inpt-inline label{float: left; width: calc(100% - 21rem);text-align: right;margin-right: 1rem;font-size: 1rem;line-height: 42px; display: inline-block;color: #333333;}
 .flex-block .inpt-inline input{float: left;width: 20rem;height: 3rem;line-height:3rem;background-color: #f5f5f5;border: 0;box-sizing: border-box;padding: 0 20px;}
 .inpt-inline.sm{width: 100%;display: flex;}
 .inpt-inline.sm label{width: 6rem;margin-right: 20px;}
 .inpt-inline.sm textarea{width:78rem;min-height:5rem; background-color: #f5f5f5;border: 0;box-sizing: border-box;padding: 10px 20px;}
-.bnt-bc{height: 3rem;float: right; display:block; line-height: 50px;font-size: 20px;border-radius:15px ;background-color: #808dff;color: #fff;width: 10rem;text-align: center;margin-top: 1rem; margin-right: 50px;}
+.bnt-bc{height: 3rem;float: right; display:block; line-height: 50px;font-size:1.25rem;border-radius:15px ;background-color: #808dff;color: #fff;width: 10rem;text-align: center;margin-top: 1rem; margin-right: 50px;}
 .bj-box{z-index: 99;box-sizing: border-box;padding-top: 45px;display: none;}
-.blockbox{zoom:1;width: 410px;margin: 0.4rem auto 0;position: relative; text-align: center;}
+.blockbox{zoom:1;width: 25.6rem;margin: 0.4rem auto 0;position: relative; text-align: center;}
 .blockbox:after{display:block;clear:both;content:"";visibility:hidden;height:0}
 
-.blockbox label{width: 90px;float: left;display: inline-block;line-height: 42px;text-align: center;}
+.blockbox label{width: 5.6rem;float: left;display: inline-block;line-height: 2.6rem;text-align: center;}
 .blockbox label span{color: #e44f4f;}
 .blockbox input{width: 20rem;float: right;height: 3rem;background-color: #f5f5f5;border: 0;padding: 0 1rem;box-sizing: border-box;}
 .blockbox.bj input{background-color:#fff;border: 1px solid #d0d0d0;}
@@ -98,7 +98,7 @@ a.sm-bnt{
 .tab-box{margin: 0 50px;}
 .layui-table th{padding: 15px;}
 .tab-box input{border: 0;background-color: rgba(0,0,0,0);}
-.layui-table td, .layui-table th{font-size: 18px;text-align: center;}
+.layui-table td, .layui-table th{font-size: 1.2rem;text-align: center;}
 button{border:0px;background-color:transparent;cursor:pointer;}
 button:active{opacity: 0.9;}
 .bnt-box{text-align: center;}
